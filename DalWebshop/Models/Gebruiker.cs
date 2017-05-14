@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebshopDal.Models
+﻿namespace DalWebshop.Models
 {
    public class Gebruiker
     {
@@ -19,5 +13,6 @@ namespace WebshopDal.Models
         public string Huisnummer { get; private set; }
         public string Postcode { get; private set; }
         public string Land { get; private set; }
+        public string Woonplaats { get; private set; }
     }
 }

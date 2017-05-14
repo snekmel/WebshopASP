@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebshopDal.Models
+﻿namespace DalWebshop.Models
 {
-    class Recensie
+    public class Recensie
     {
         public int Id { get; private set; }
         public string Opmerking { get; private set; }

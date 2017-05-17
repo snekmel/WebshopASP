@@ -65,3 +65,5 @@ C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\WebshopASP\bin\M
 C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\WebshopASP\obj\Debug\WebshopASP.csprojResolveAssemblyReference.cache
 C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\WebshopASP\obj\Debug\WebshopASP.dll
 C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\WebshopASP\obj\Debug\WebshopASP.pdb
+C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\WebshopASP\bin\DalWebshop.dll
+C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\WebshopASP\bin\DalWebshop.pdb

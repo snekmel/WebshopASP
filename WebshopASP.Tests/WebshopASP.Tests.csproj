@@ -83,6 +83,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="GebruikerTests.cs" />
+    <Compile Include="LeverancierTests.cs" />
+    <Compile Include="KortingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -91,8 +94,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DalWebshop\DalWebshop.csproj">
+      <Project>{52BA8898-B372-4BD8-A6EA-6CF5A79B0EE8}</Project>
+      <Name>DalWebshop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebshopASP\WebshopASP.csproj">
-      <Project>{90B22649-6652-4BC3-94D5-D1B7B71341B2}</Project>
+      <Project>{90b22649-6652-4bc3-94d5-d1b7b71341b2}</Project>
       <Name>WebshopASP</Name>
     </ProjectReference>
   </ItemGroup>

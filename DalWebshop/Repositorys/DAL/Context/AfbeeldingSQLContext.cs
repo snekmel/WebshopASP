@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using DalWebshop.Models;
 using DalWebshop.Repositorys.DAL.Interfaces;
+using System.Data.SqlClient;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {
-    class AfbeeldingSQLContext : IMaintanable<Afbeelding>
+    public class AfbeeldingSQLContext : IMaintanable<Afbeelding>
     {
         public string Create(Afbeelding obj)
         {

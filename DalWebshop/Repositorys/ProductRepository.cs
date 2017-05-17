@@ -1,6 +1,6 @@
 ﻿namespace DalWebshop.Repositorys
 {
-    class ProductRepository
+    public class ProductRepository
     {
     }
 }

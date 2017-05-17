@@ -1,0 +1,5 @@
+C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\bin\Debug\DalWebshop.dll
+C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\bin\Debug\DalWebshop.pdb
+C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\obj\Debug\DalWebshop.csprojResolveAssemblyReference.cache
+C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\obj\Debug\DalWebshop.dll
+C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\obj\Debug\DalWebshop.pdb

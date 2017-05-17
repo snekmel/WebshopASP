@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>52ba8898-b372-4bd8-a6ea-6cf5a79b0ee8</ProjectGuid>
+    <ProjectGuid>{52BA8898-B372-4BD8-A6EA-6CF5A79B0EE8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DalWebshop</RootNamespace>
@@ -30,24 +30,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Models\Afbeelding.cs" />
+    <Compile Include="Models\Gebruiker.cs" />
+    <Compile Include="Models\Korting.cs" />
+    <Compile Include="Models\Kortingcoupon.cs" />
+    <Compile Include="Models\Leverancier.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Productcategorie.cs" />
+    <Compile Include="Models\Recensie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorys\AfbeeldingRepository.cs" />
+    <Compile Include="Repositorys\DAL\Context\AfbeeldingSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Context\GebruikerSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Context\KortingSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Context\LeverancierSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Env.cs" />
+    <Compile Include="Repositorys\DAL\Interfaces\IMaintanable.cs" />
+    <Compile Include="Repositorys\GebruikerRepository.cs" />
+    <Compile Include="Repositorys\KortingCouponRepository.cs" />
+    <Compile Include="Repositorys\KortingRepository.cs" />
+    <Compile Include="Repositorys\LeverancierRepository.cs" />
+    <Compile Include="Repositorys\OrderRepository.cs" />
+    <Compile Include="Repositorys\ProductRepository.cs" />
+    <Compile Include="Repositorys\RecensieRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>

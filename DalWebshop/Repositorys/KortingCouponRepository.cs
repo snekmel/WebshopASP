@@ -1,6 +1,6 @@
 ﻿namespace DalWebshop.Repositorys
 {
-    class KortingCouponRepository
+    public class KortingCouponRepository
     {
     }
 }

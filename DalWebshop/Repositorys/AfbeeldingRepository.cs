@@ -3,7 +3,7 @@ using DalWebshop.Repositorys.DAL.Interfaces;
 
 namespace DalWebshop.Repositorys
 {
-    class AfbeeldingRepository
+    public class AfbeeldingRepository
     {
 
         private IMaintanable<Afbeelding> _interface;

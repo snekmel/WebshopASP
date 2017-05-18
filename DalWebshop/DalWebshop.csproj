@@ -57,6 +57,7 @@
     <Compile Include="Repositorys\DAL\Context\KortingcouponSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Context\KortingSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Context\LeverancierSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Context\OrderSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Context\ProductcategorieSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Context\ProductSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Context\RecensieSQLContext.cs" />

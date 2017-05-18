@@ -6,22 +6,21 @@ using System.Data.SqlClient;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {
-    public class KortingSQLContext : IMaintanable<Korting>
+    public class KortingcouponSQLContext : IMaintanable<Kortingcoupon>
     {
-        public string Create(Korting obj)
+        public string Create(Kortingcoupon obj)
         {
             int returnId = 0;
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "INSERT INTO Korting (kortingspercentage ,opmerking ,eindDatum) VALUES (@kortingspercentage, @opmerking, @eindDatum);SELECT CAST(scope_identity() AS int);";
+                    string query = "INSERT INTO Kortingcoupon (code,kortingspercentage)VALUES (@code, @kortingspercentage);SELECT CAST(scope_identity() AS int);";
                     SqlCommand cmd = new SqlCommand(query, con);
 
                     con.Open();
                     cmd.Parameters.AddWithValue("@kortingspercentage", obj.Kortingspercentage);
-                    cmd.Parameters.AddWithValue("@opmerking", obj.Opmerking);
-                    cmd.Parameters.AddWithValue("@eindDatum", obj.EindDatum);
+                    cmd.Parameters.AddWithValue("@code", obj.Code);
 
                     returnId = (int)cmd.ExecuteScalar();
 
@@ -37,14 +36,14 @@ namespace DalWebshop.Repositorys.DAL.Context
             }
         }
 
-        public Korting Retrieve(string key)
+        public Kortingcoupon Retrieve(string key)
         {
-            Korting returnKorting = null;
+            Kortingcoupon returnKortingcoupon = null;
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "Select * from Korting where id = @key";
+                    string query = "Select * from Kortingcoupon where id = @key";
                     SqlCommand cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@key", key);
 
@@ -54,12 +53,12 @@ namespace DalWebshop.Repositorys.DAL.Context
 
                     while (reader.Read())
                     {
-                        returnKorting = new Korting(reader.GetInt32(0), Convert.ToDouble(reader.GetDecimal(1)), reader.GetString(2), reader.GetDateTime(3));
+                        returnKortingcoupon = new Kortingcoupon(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
                     }
                     con.Close();
                 }
 
-                return returnKorting;
+                return returnKortingcoupon;
             }
             catch (Exception e)
             {
@@ -68,14 +67,14 @@ namespace DalWebshop.Repositorys.DAL.Context
             }
         }
 
-        public List<Korting> RetrieveAll()
+        public List<Kortingcoupon> RetrieveAll()
         {
-            List<Korting> returnList = new List<Korting>();
+            List<Kortingcoupon> returnList = new List<Kortingcoupon>();
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "Select * from Korting";
+                    string query = "Select * from Kortingcoupon";
                     SqlCommand cmd = new SqlCommand(query, con);
 
                     con.Open();
@@ -84,7 +83,7 @@ namespace DalWebshop.Repositorys.DAL.Context
 
                     while (reader.Read())
                     {
-                        Korting k = new Korting(reader.GetInt32(0), Convert.ToDouble(reader.GetDecimal(1)), reader.GetString(2), reader.GetDateTime(3));
+                        Kortingcoupon k = new Kortingcoupon(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
                         returnList.Add(k);
                     }
                     con.Close();
@@ -99,21 +98,22 @@ namespace DalWebshop.Repositorys.DAL.Context
             }
         }
 
-        public void Update(Korting obj)
+        public void Update(Kortingcoupon obj)
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = " UPDATE Korting SET kortingspercentage = @kortingspercentage, opmerking = @opmerking, eindDatum = @eindDatum WHERE id = @key";
+                    string query = "UPDATE Kortingcoupon SET code = @code, kortingspercentage = @kortingspercentage WHERE id = @key";
+
                     SqlCommand cmd = new SqlCommand(query, con);
 
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@code", obj.Code);
                     cmd.Parameters.AddWithValue("@kortingspercentage", obj.Kortingspercentage);
-                    cmd.Parameters.AddWithValue("@opmerking", obj.Opmerking);
-                    cmd.Parameters.AddWithValue("@eindDatum", obj.EindDatum);
                     cmd.Parameters.AddWithValue("@key", obj.Id);
 
-                    con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
@@ -131,7 +131,7 @@ namespace DalWebshop.Repositorys.DAL.Context
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "DELETE FROM Korting where id = @key";
+                    string query = "DELETE FROM Kortingcoupon where id = @key";
                     SqlCommand cmd = new SqlCommand(query, con);
 
                     cmd.Parameters.AddWithValue("@key", key);

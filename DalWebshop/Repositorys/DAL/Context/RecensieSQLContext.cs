@@ -6,22 +6,24 @@ using System.Data.SqlClient;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {
-    public class KortingSQLContext : IMaintanable<Korting>
+    public class RecensieSQLContext : IMaintanable<Recensie>
     {
-        public string Create(Korting obj)
+        public string Create(Recensie obj)
         {
             int returnId = 0;
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "INSERT INTO Korting (kortingspercentage ,opmerking ,eindDatum) VALUES (@kortingspercentage, @opmerking, @eindDatum);SELECT CAST(scope_identity() AS int);";
+                    string query = "INSERT INTO Recensie (opmerking ,tevreden ,score ,gebruikerId ,productId) VALUES (@opmerking, @tevreden, @score, @gebruikerId, @productId);SELECT CAST(scope_identity() AS int);";
                     SqlCommand cmd = new SqlCommand(query, con);
 
                     con.Open();
-                    cmd.Parameters.AddWithValue("@kortingspercentage", obj.Kortingspercentage);
                     cmd.Parameters.AddWithValue("@opmerking", obj.Opmerking);
-                    cmd.Parameters.AddWithValue("@eindDatum", obj.EindDatum);
+                    cmd.Parameters.AddWithValue("@tevreden", Convert.ToInt32(obj.Tevreden));
+                    cmd.Parameters.AddWithValue("@score", obj.Score);
+                    cmd.Parameters.AddWithValue("@gebruikerId", obj.GebruikerId);
+                    cmd.Parameters.AddWithValue("@productId", obj.ProductId);
 
                     returnId = (int)cmd.ExecuteScalar();
 
@@ -37,14 +39,14 @@ namespace DalWebshop.Repositorys.DAL.Context
             }
         }
 
-        public Korting Retrieve(string key)
+        public Recensie Retrieve(string key)
         {
-            Korting returnKorting = null;
+            Recensie returnRecensie = null;
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "Select * from Korting where id = @key";
+                    string query = "Select * from Recensie where id = @key";
                     SqlCommand cmd = new SqlCommand(query, con);
                     cmd.Parameters.AddWithValue("@key", key);
 
@@ -54,12 +56,12 @@ namespace DalWebshop.Repositorys.DAL.Context
 
                     while (reader.Read())
                     {
-                        returnKorting = new Korting(reader.GetInt32(0), Convert.ToDouble(reader.GetDecimal(1)), reader.GetString(2), reader.GetDateTime(3));
+                        returnRecensie = new Recensie(reader.GetInt32(0), reader.GetString(1),Convert.ToBoolean(reader.GetInt32(2)), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5));
                     }
                     con.Close();
                 }
 
-                return returnKorting;
+                return returnRecensie;
             }
             catch (Exception e)
             {
@@ -68,15 +70,16 @@ namespace DalWebshop.Repositorys.DAL.Context
             }
         }
 
-        public List<Korting> RetrieveAll()
+        public List<Recensie> RetrieveAll()
         {
-            List<Korting> returnList = new List<Korting>();
+            List<Recensie> returnList = new List<Recensie>();
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "Select * from Korting";
+                    string query = "Select * from Recensie";
                     SqlCommand cmd = new SqlCommand(query, con);
+                 
 
                     con.Open();
 
@@ -84,8 +87,8 @@ namespace DalWebshop.Repositorys.DAL.Context
 
                     while (reader.Read())
                     {
-                        Korting k = new Korting(reader.GetInt32(0), Convert.ToDouble(reader.GetDecimal(1)), reader.GetString(2), reader.GetDateTime(3));
-                        returnList.Add(k);
+                       Recensie r = new Recensie(reader.GetInt32(0), reader.GetString(1), Convert.ToBoolean(reader.GetInt32(2)), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5));
+                        returnList.Add(r);
                     }
                     con.Close();
                 }
@@ -98,22 +101,26 @@ namespace DalWebshop.Repositorys.DAL.Context
                 throw;
             }
         }
-
-        public void Update(Korting obj)
+       
+        public void Update(Recensie obj)
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = " UPDATE Korting SET kortingspercentage = @kortingspercentage, opmerking = @opmerking, eindDatum = @eindDatum WHERE id = @key";
+                    string query = " UPDATE Recensie SET opmerking = @opmerking, tevreden = @tevreden, score = @score, gebruikerId = @gebruikerId, productId = @productId WHERE id = @key";
+
                     SqlCommand cmd = new SqlCommand(query, con);
 
-                    cmd.Parameters.AddWithValue("@kortingspercentage", obj.Kortingspercentage);
+                    con.Open();
+
                     cmd.Parameters.AddWithValue("@opmerking", obj.Opmerking);
-                    cmd.Parameters.AddWithValue("@eindDatum", obj.EindDatum);
+                    cmd.Parameters.AddWithValue("@tevreden", Convert.ToInt32(obj.Tevreden));
+                    cmd.Parameters.AddWithValue("@score", obj.Score);
+                    cmd.Parameters.AddWithValue("@gebruikerId", obj.GebruikerId);
+                    cmd.Parameters.AddWithValue("@productId", obj.ProductId);
                     cmd.Parameters.AddWithValue("@key", obj.Id);
 
-                    con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
@@ -131,7 +138,7 @@ namespace DalWebshop.Repositorys.DAL.Context
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "DELETE FROM Korting where id = @key";
+                    string query = "DELETE FROM Recensie where id = @key";
                     SqlCommand cmd = new SqlCommand(query, con);
 
                     cmd.Parameters.AddWithValue("@key", key);

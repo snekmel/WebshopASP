@@ -51,10 +51,15 @@
     <Compile Include="Models\Recensie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorys\AfbeeldingRepository.cs" />
+    <Compile Include="Repositorys\AuthRepository.cs" />
     <Compile Include="Repositorys\DAL\Context\AfbeeldingSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Context\GebruikerSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Context\KortingcouponSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Context\KortingSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Context\LeverancierSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Context\ProductcategorieSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Context\ProductSQLContext.cs" />
+    <Compile Include="Repositorys\DAL\Context\RecensieSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Env.cs" />
     <Compile Include="Repositorys\DAL\Interfaces\IMaintanable.cs" />
     <Compile Include="Repositorys\GebruikerRepository.cs" />
@@ -62,6 +67,7 @@
     <Compile Include="Repositorys\KortingRepository.cs" />
     <Compile Include="Repositorys\LeverancierRepository.cs" />
     <Compile Include="Repositorys\OrderRepository.cs" />
+    <Compile Include="Repositorys\ProductCategorieRepository.cs" />
     <Compile Include="Repositorys\ProductRepository.cs" />
     <Compile Include="Repositorys\RecensieRepository.cs" />
   </ItemGroup>

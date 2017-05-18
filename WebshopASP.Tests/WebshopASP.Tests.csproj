@@ -86,6 +86,10 @@
     <Compile Include="GebruikerTests.cs" />
     <Compile Include="LeverancierTests.cs" />
     <Compile Include="KortingTests.cs" />
+    <Compile Include="ProductCategorieTests.cs" />
+    <Compile Include="KortingcouponTests.cs" />
+    <Compile Include="RecensieTests.cs" />
+    <Compile Include="ProductTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

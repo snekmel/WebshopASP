@@ -16,9 +16,9 @@ namespace WebshopASP.Tests
             KortingSQLContext ksc = new KortingSQLContext();
             KortingRepository kr = new KortingRepository(ksc);
 
-            Korting k = kr.Retrieve("1");
+            Korting k = kr.Retrieve("5");
             k.Kortingspercentage = k.Kortingspercentage + 1;
-          //   kr.Create(k);
+            kr.Create(k);
 
 
 
@@ -30,7 +30,7 @@ namespace WebshopASP.Tests
             KortingSQLContext ksc = new KortingSQLContext();
             KortingRepository kr = new KortingRepository(ksc);
 
-            Korting k = kr.Retrieve("1");
+            Korting k = kr.Retrieve("5");
             Assert.IsTrue(k.Kortingspercentage == 23);
 
         }
@@ -53,7 +53,7 @@ namespace WebshopASP.Tests
             KortingSQLContext ksc = new KortingSQLContext();
             KortingRepository kr = new KortingRepository(ksc);
 
-            Korting k = kr.Retrieve("1");
+            Korting k = kr.Retrieve("5");
 
             k.Opmerking = k.Opmerking + "aangepast";
 

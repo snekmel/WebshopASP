@@ -1,6 +1,42 @@
-﻿namespace DalWebshop.Repositorys
+﻿using System.Collections.Generic;
+using DalWebshop.Models;
+using DalWebshop.Repositorys.DAL.Interfaces;
+
+namespace DalWebshop.Repositorys
 {
     public class KortingCouponRepository
     {
+
+        private IMaintanable<Kortingcoupon> _crudInterface;
+
+        public KortingCouponRepository(IMaintanable<Kortingcoupon> i )
+        {
+            _crudInterface = i;
+        }
+
+        public string Create(Kortingcoupon obj)
+        {
+            return _crudInterface.Create(obj);
+        }
+
+        public List<Kortingcoupon> RetrieveAll()
+        {
+            return _crudInterface.RetrieveAll();
+        }
+
+        public Kortingcoupon Retrieve(string key)
+        {
+            return _crudInterface.Retrieve(key);
+        }
+
+        public void Update(Kortingcoupon obj)
+        {
+            _crudInterface.Update(obj);
+        }
+
+        public void Delete(string key)
+        {
+            _crudInterface.Delete(key);
+        }
     }
 }

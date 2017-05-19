@@ -1,0 +1,135 @@
+﻿@using System.Web.UI.WebControls
+@using DalWebshop.Models
+
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Product> producten = ViewBag.Producten;
+}
+
+
+<div class="row text-center">
+    <br/>
+    <h2>Products</h2>
+
+    <table id="productTable" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>In Stock</th>
+            <th>Price</th>
+            <th>HasDiscount</th>
+            <th>Supplier</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>In Stock</th>
+            <th>Price</th>
+            <th>HasDiscount</th>
+            <th>Supplier</th>
+            <th>Edit</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        @foreach (Product p in producten)
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>@p.Titel</td>
+                <td>@p.Omschrijving</td>
+                <td>@p.Voorraad</td>
+                <td>@p.Prijs</td>
+                <td>idk</td>
+                <td>@p.LeverancierId</td>
+                <td>edit</td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+    </div>
+  <div class="row text-center">
+      <br />
+    <div class="centered columns">
+        <h2 class="center"> Add Product</h2>
+        
+
+        @using (Html.BeginForm("NewProduct", "Manage", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="large-6 columns">
+                    <h3>ProductInformation</h3>                    
+                    <table class="unstriped">
+                        <tr>
+                            <td>@Html.Label("Titel")</td>
+                            <td>@Html.TextBox("Title")</td>
+                    
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Description")</td>
+                            <td>@Html.TextBox("Description")</td>
+
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Stock")</td>
+                            <td>@Html.TextBox("Stock")</td>
+
+                        </tr>
+                    </table>
+               
+              
+               
+                    @Html.Label("Supplier")
+                    @Html.Label("Categorie")
+                </div>
+                <div class="large-6 columns">
+                    
+                    <h3>Pictures</h3>                           
+                    <table class="unstriped">
+                        <tr>
+                            <td>@Html.Label("Main Image")</td>
+                            <td>@Html.TextBox("file", "", new { type = "file" })</td>
+
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Image1")</td>
+                            <td>@Html.TextBox("Image1", "", new { type = "file" })</td>
+
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Image2")</td>
+                            <td>@Html.TextBox("Image2", "", new { type = "file" })</td>
+
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Image3")</td>
+                            <td>@Html.TextBox("Image3", "", new { type = "file" })</td>
+
+                        </tr>
+                        <tr>
+                            <td>@Html.Label("Image4")</td>
+                            <td>@Html.TextBox("Image4", "", new { type = "file" })</td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+ <input class="button expanded" type="submit" value="Save" />
+
+
+        }
+        </div>
+
+    </div>
+
+
+

@@ -9,7 +9,7 @@ namespace WebshopASP.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            List<Product> products = DalWebshop.Models.Product.All();
+          //  List<Product> products = DalWebshop.Models.Product.All();
 
             return View("~/Views/Product/Index.cshtml");
         }

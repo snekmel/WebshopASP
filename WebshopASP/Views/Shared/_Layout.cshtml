@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Webshop (KillerApp)</title>
     <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     @Styles.Render("~/Content/Site.css")
 </head>
 <body>
@@ -44,7 +45,7 @@
                             <li><a href="#">Suppliers</a></li>
                             <li><a href="#">Discounts</a></li>
                             <li><a href="#">DiscountCoupons</a></li>
-                            <li><a href="#">Products</a></li>
+                            <li><a href="/Manage/Products">Products</a></li>
                         </ul>
                     </li>
                 }
@@ -95,9 +96,8 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-    <script>
-        $(document).foundation();
-    </script>
+<script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>  
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    @Scripts.Render("~/Content/Scripts/Site.js");
 </body>
 </html>

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using DalWebshop.Repositorys;
+using DalWebshop.Repositorys.DAL.Context;
 
 namespace DalWebshop.Models
 {
@@ -61,6 +63,15 @@ namespace DalWebshop.Models
             return null;
         }
 
+
+
+
+
+
+
+
+
+        //-----------------------------------------------------------Fat Model----------------------------------------------------
         public void SaveOrUpdate()
         {
             if (Id != null)
@@ -73,9 +84,21 @@ namespace DalWebshop.Models
             }
         }
 
-        private static List<Product> All()
+        public static List<Product> All()
         {
-            return null;
+            ProductSQLContext psc = new ProductSQLContext();
+            ProductRepository pr = new ProductRepository(psc);
+
+            return pr.RetrieveAll();
+        }
+
+        public static Product Find(string key)
+        {
+            ProductSQLContext psc = new ProductSQLContext();
+            ProductRepository pr = new ProductRepository(psc);
+
+            return pr.Retrieve(key);
+
         }
     }
 }

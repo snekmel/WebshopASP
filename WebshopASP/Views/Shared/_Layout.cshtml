@@ -1,29 +1,73 @@
-﻿<!doctype html>
+﻿@using DalWebshop.Models
+@{
+
+    Gebruiker AuthUser = (Gebruiker)Session["AuthGebruiker"];
+    ViewBag.AuthGebruiker = Session["AuthGebruiker"];
+
+}<!doctype html>
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation | Welcome</title>
+    <title>Webshop (KillerApp)</title>
     <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+    @Styles.Render("~/Content/Site.css")
 </head>
 <body>
     <!-- Start Top Bar -->
-<div class="top-bar">
-    <div class="top-bar-left">
-        <ul class="menu">
-            <li class="menu-text">Webshop</li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
-          
-        </ul>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+                <li class="menu-text">Webshop</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/Products">Products</a></li>
+
+                @if (AuthUser != null)
+                {
+
+                    <li>
+                        <a>Account</a>
+                        <ul class="menu">
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="#">Orders</a></li>
+                        </ul>
+                    </li>
+                }
+
+                @if (AuthUser != null && AuthUser.IsAdmin)
+            {
+                    <li>
+                        <a>Manage</a>
+                        <ul class="menu">
+                            <li><a href="#">Users</a></li>
+                            <li><a href="#">Orders</a></li>
+                            <li><a href="#">Suppliers</a></li>
+                            <li><a href="#">Discounts</a></li>
+                            <li><a href="#">DiscountCoupons</a></li>
+                            <li><a href="#">Products</a></li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+
+                @if (AuthUser == null)
+            {
+
+                    <li><a href="/Login">Login</a></li>
+                    <li><a href="/Register">Create Account</a></li>
+
+                }
+                else
+                {
+                    <li><a href="/Logout">Logout</a></li>
+                }
+            </ul>
+        </div>
     </div>
-    <div class="top-bar-right">
-        <ul class="menu">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Create Account</a></li>
-        </ul>
-    </div>
-</div>  
     @RenderBody();
 
     <div class="callout large secondary">
@@ -53,7 +97,7 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
     <script>
-      $(document).foundation();
+        $(document).foundation();
     </script>
 </body>
 </html>

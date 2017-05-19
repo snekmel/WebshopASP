@@ -1,0 +1,31 @@
+﻿@using System.Web.UI.WebControls
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div id="login-form" class="small-9 small-centered columns">
+        <h1 class="center"> Login</h1>
+        @using (Html.BeginForm("LoginPost", "Auth", FormMethod.Post))
+        {
+
+            @Html.Label("Email")
+            @Html.TextBox("Email")
+
+            @Html.Label("Password")
+            @Html.Password("Password")
+            <input class="button expanded" type="submit" value="Save" />
+        }
+        @if (ViewBag.LoginResult != null && !ViewBag.LoginResult)
+        {
+            <br />
+            <div class="callout alert">
+                <h5> Something went wrong here!</h5>
+                <p>It seems that your accountinformation was wrong!</p>
+            </div>
+        }
+    </div>
+</div>

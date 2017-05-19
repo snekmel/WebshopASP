@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace WebshopASP
@@ -16,7 +12,7 @@ namespace WebshopASP
             routes.MapRoute(
                 name: "Products",
                 url: "Products",
-                defaults: new { controller = "Product", action = "Index"}
+                defaults: new { controller = "Product", action = "Index" }
             );
 
             routes.MapRoute(
@@ -24,6 +20,24 @@ namespace WebshopASP
              url: "Product/{id}",
              defaults: new { controller = "Product", action = "Product", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+name: "LoginPost",
+url: "Auth/Post",
+defaults: new { controller = "Auth", action = "LoginPost" }
+);
+
+            routes.MapRoute(
+  name: "Login",
+ url: "Login",
+ defaults: new { controller = "Auth", action = "Login", loginResult = UrlParameter.Optional }
+);
+
+            routes.MapRoute(
+name: "Logout",
+url: "Logout",
+defaults: new { controller = "Auth", action = "Logout" }
+);
 
             routes.MapRoute(
                 name: "Default",

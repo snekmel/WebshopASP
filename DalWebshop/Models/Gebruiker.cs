@@ -1,4 +1,8 @@
-﻿namespace DalWebshop.Models
+﻿using DalWebshop.Repositorys;
+using DalWebshop.Repositorys.DAL.Context;
+using System.Collections.Generic;
+
+namespace DalWebshop.Models
 {
     public class Gebruiker
     {
@@ -41,6 +45,36 @@
             Postcode = postcode;
             Land = land;
             Woonplaats = woonplaats;
+        }
+
+        //------------ Fat model
+
+        public void SaveOrUpdate()
+        {
+            if (Id != null)
+            {
+                //update
+            }
+            else
+            {
+                //save
+            }
+        }
+
+        public static List<Gebruiker> All()
+        {
+            GebruikerSQLContext gsc = new GebruikerSQLContext();
+            GebruikerRepository gr = new GebruikerRepository(gsc);
+
+            return gr.RetrieveAll();
+        }
+
+        public static Gebruiker Find(string key)
+        {
+            GebruikerSQLContext gsc = new GebruikerSQLContext();
+            GebruikerRepository gr = new GebruikerRepository(gsc);
+
+            return gr.Retrieve(key);
         }
     }
 }

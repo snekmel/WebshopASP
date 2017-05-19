@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using DalWebshop.Repositorys;
+﻿using DalWebshop.Repositorys;
 using DalWebshop.Repositorys.DAL.Context;
+using System.Collections.Generic;
 
 namespace DalWebshop.Models
 {
     public class Product
     {
         public int Id { get; private set; }
-        public string Titel { get;  set; }
-        public string Omschrijving { get;  set; }
-        public int Voorraad { get;  set; }
-        public decimal Prijs { get;  set; }
+        public string Titel { get; set; }
+        public string Omschrijving { get; set; }
+        public int Voorraad { get; set; }
+        public decimal Prijs { get; set; }
 
         public int KortingId { get; set; }
         public int LeverancierId { get; private set; }
@@ -63,14 +63,6 @@ namespace DalWebshop.Models
             return null;
         }
 
-
-
-
-
-
-
-
-
         //-----------------------------------------------------------Fat Model----------------------------------------------------
         public void SaveOrUpdate()
         {
@@ -98,7 +90,6 @@ namespace DalWebshop.Models
             ProductRepository pr = new ProductRepository(psc);
 
             return pr.Retrieve(key);
-
         }
     }
 }

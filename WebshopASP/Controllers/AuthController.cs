@@ -23,6 +23,35 @@ namespace WebshopASP.Controllers
             return RedirectToAction("Index","Home");
         }
 
+
+
+        // Get :Register
+        public ActionResult Register()
+        {
+            return View("~/Views/Auth/Register.cshtml");
+        }
+
+        //Pst: RegisterPost
+        [HttpPost]
+        public ActionResult RegisterPost(FormCollection form)
+        {
+
+         Gebruiker newUser = new Gebruiker(form["Email"],form["Password"], form["Name"],form["Lastname"],false,form["Street"],form["HouseNumeber"],form["Zipcode"],form["Country"],form["City"]);
+         string id = newUser.SaveOrUpdate();
+
+            if (id == null)
+            {
+                ViewBag.RegisterResult = false;
+            }
+            else
+            {
+                ViewBag.RegisterResult = true;
+            }
+            return View("~/Views/Auth/Register.cshtml");
+        }
+
+
+
         // POST: Login
         [HttpPost]
         public ActionResult LoginPost(FormCollection form)

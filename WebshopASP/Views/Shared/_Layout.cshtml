@@ -10,9 +10,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Webshop (KillerApp)</title>
+    @Styles.Render("~/Content/Site.css")
     <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-    @Styles.Render("~/Content/Site.css")
+
 </head>
 <body>
     <!-- Start Top Bar -->
@@ -22,15 +23,14 @@
                 <li class="menu-text">Webshop</li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/Products">Products</a></li>
-
                 @if (AuthUser != null)
                 {
 
                     <li>
                         <a>Account</a>
                         <ul class="menu">
-                            <li><a href="#">Settings</a></li>
-                            <li><a href="#">Orders</a></li>
+                            <li><a href="/Account/Settings">Settings</a></li>
+                            <li><a href="/Account/Orders">Orders</a></li>
                         </ul>
                     </li>
                 }
@@ -40,17 +40,16 @@
                     <li>
                         <a>Manage</a>
                         <ul class="menu">
-                            <li><a href="#">Users</a></li>
-                            <li><a href="#">Orders</a></li>
-                            <li><a href="#">Suppliers</a></li>
-                            <li><a href="#">Discounts</a></li>
-                            <li><a href="#">DiscountCoupons</a></li>
+                            <li><a href="/Manage/Users">Users</a></li>
+                            <li><a href="/Manage/Orders">Orders</a></li>
+                            <li><a href="/Manage/Suppliers">Suppliers</a></li>
+                            <li><a href="/Manage/Discounts">Discounts</a></li>
+                            <li><a href="/Manage/Discountcoupons">DiscountCoupons</a></li>
                             <li><a href="/Manage/Products">Products</a></li>
                         </ul>
                     </li>
                 }
             </ul>
-
         </div>
         <div class="top-bar-right">
             <ul class="menu">
@@ -96,8 +95,8 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>  
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     @Scripts.Render("~/Content/Scripts/Site.js");
 </body>
 </html>

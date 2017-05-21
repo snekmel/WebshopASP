@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <h2 class="center">Register</h2>
+    @using (Html.BeginForm("RegisterPost", "Auth", FormMethod.Post))
+    {
+        <div id="registerForm" class="row">
+            <div class="large-4 columns">
+                @Html.TextBox("Email", "Email Adress")
+                @Html.TextBox("Name", "Firstname")
+                @Html.TextBox("Lastname", "Lastname")
+                @Html.TextBox("Password", "Password")
+                @Html.TextBox("Password", "Password Validation")
+            </div>
+            <div class="large-8 columns">
+                <div class="large-8 columns">
+                    @Html.TextBox("Street", "Street")
+                    @Html.TextBox("Zipcode", "Zipcode")
+                    @Html.TextBox("City", "City")
+                    @Html.TextBox("Country", "Country")
+                </div>
+                <div class="large-4 columns">
+                    @Html.TextBox("HouseNumber", "House Number")
+                </div>
+            </div>
+        </div>
+        <div id="createAccountbtn" class="row">
+            <div class="large-12 columns">
+                <input class="button expanded" type="submit" value="Create Account" />
+            </div>
+        </div>
+
+    }
+
+
+
+
+
+    @if (@ViewBag.RegisterResult != null)
+    {
+        <div id="loginResult" class="row">
+
+            <div class="large-12 columns">
+                @if (@ViewBag.RegisterResult)
+                {
+                    <div class="callout success">
+                        <h5> Succes!</h5>
+                        <p>Account has been created.</p>
+                    </div>
+
+
+                }
+
+                @if (!@ViewBag.RegisterResult)
+                {
+                    <div class="callout alert">
+                        <h5> Oops!</h5>
+                        <p>Something went wrong!. Please try again later.</p>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+
+    }
+</div>

@@ -1,17 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using DalWebshop.Models;
 using System.Web.Mvc;
-using DalWebshop.Models;
 
 namespace WebshopASP.Controllers
 {
     public class ManageController : Controller
     {
+        //Get: Manage/Users
+        public ActionResult Users()
+        {
+            return View("~/Views/Manage/Users.cshtml");
+        }
 
-         
-       
+        //Get: Manage/Orders
+        public ActionResult Orders()
+        {
+            return View("~/Views/Manage/Orders.cshtml");
+        }
+
+        //Get: Manage/Suppliers
+        public ActionResult Suppliers()
+        {
+            return View("~/Views/Manage/Suppliers.cshtml");
+        }
+
+        //Get: Manage/Discounts
+        public ActionResult Discounts()
+        {
+            return View("~/Views/Manage/Discounts.cshtml");
+        }
+
+        //Get: Manage/DiscountCoupons
+        public ActionResult DiscountCoupons()
+        {
+            return View("~/Views/Manage/DiscountCoupons.cshtml");
+        }
+
         // GET: Manage/Products
         public ActionResult Products()
         {
@@ -23,12 +46,9 @@ namespace WebshopASP.Controllers
         public ActionResult NewProduct(FormCollection form)
         {
             //Save product
-
             //Save images
-
             //Koppel aan product
             return this.Products();
         }
-
     }
 }

@@ -17,9 +17,9 @@ namespace WebshopASP.Controllers
         // GET: Product/{id}
         public ActionResult Product(string id)
         {
-            Product selectedProduct = DalWebshop.Models.Product.Find(id);
+          //  Product selectedProduct = DalWebshop.Models.Product.Find(id);
 
-            ViewBag.Product = selectedProduct;
+           // ViewBag.Product = selectedProduct;
             return View("~/Views/Product/Product.cshtml");
         }
     }

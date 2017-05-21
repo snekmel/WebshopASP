@@ -49,15 +49,20 @@ namespace DalWebshop.Models
 
         //------------ Fat model
 
-        public void SaveOrUpdate()
+        public string SaveOrUpdate()
         {
+
+            GebruikerSQLContext gsc = new GebruikerSQLContext();
+            GebruikerRepository gr = new GebruikerRepository(gsc);
+
             if (Id != null)
             {
-                //update
+               gr.Update(this);
+                return this.Id.ToString();
             }
             else
             {
-                //save
+             return gr.Create(this);
             }
         }
 

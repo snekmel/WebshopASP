@@ -5,8 +5,24 @@
 
 .center {
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .big {
     width: auto;
 }
+
+.nmrBox {
+    width: 30%;
+}
+
+.border {
+    border: 3px solid black;
+}
+
+.removeLayout {
+    display: none;
+}
+
+

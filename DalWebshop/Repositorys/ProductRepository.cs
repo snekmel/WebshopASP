@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys.DAL.Interfaces;
+using System.Collections.Generic;
 
 namespace DalWebshop.Repositorys
 {
     public class ProductRepository
     {
-
         private IMaintanable<Product> _crudInterface;
-        public ProductRepository(IMaintanable<Product> i )
+
+        public ProductRepository(IMaintanable<Product> i)
         {
             _crudInterface = i;
-
         }
 
         public string Create(Product obj)
         {
-           return  _crudInterface.Create(obj);
+            return _crudInterface.Create(obj);
         }
 
         public Product Retrieve(string key)
@@ -38,7 +37,5 @@ namespace DalWebshop.Repositorys
         {
             _crudInterface.Delete(key);
         }
-
-
     }
 }

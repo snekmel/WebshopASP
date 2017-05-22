@@ -58,15 +58,12 @@ namespace DalWebshop.Repositorys.DAL.Context
 
                     while (reader.Read())
                     {
-
-                      
-                        
                         returnProduct = new Product(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetDecimal(4), reader.GetInt32(6), reader.GetInt32(7));
 
-                       if (!reader.IsDBNull(5))
-                       {
-                           returnProduct.KortingId = reader.GetInt32(5);
-                       }
+                        if (!reader.IsDBNull(5))
+                        {
+                            returnProduct.KortingId = reader.GetInt32(5);
+                        }
                     }
                     con.Close();
                 }
@@ -89,7 +86,7 @@ namespace DalWebshop.Repositorys.DAL.Context
                 {
                     string query = "Select * from Product";
                     SqlCommand cmd = new SqlCommand(query, con);
-             
+
                     con.Open();
 
                     var reader = cmd.ExecuteReader();
@@ -102,9 +99,8 @@ namespace DalWebshop.Repositorys.DAL.Context
                         {
                             p.KortingId = reader.GetInt32(5);
                         }
-                        
-                        returnList.Add(p);
 
+                        returnList.Add(p);
                     }
                     con.Close();
                 }
@@ -138,7 +134,6 @@ namespace DalWebshop.Repositorys.DAL.Context
                     cmd.Parameters.AddWithValue("@leverancierId", obj.LeverancierId);
                     cmd.Parameters.AddWithValue("@productcategorieId", obj.ProductCategorieId);
                     cmd.Parameters.AddWithValue("@key", obj.Id);
-
 
                     cmd.ExecuteNonQuery();
                     con.Close();

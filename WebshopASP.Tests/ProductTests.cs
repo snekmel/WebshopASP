@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys;
 using DalWebshop.Repositorys.DAL.Context;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace WebshopASP.Tests
 {
@@ -17,25 +16,19 @@ namespace WebshopASP.Tests
             ProductRepository pr = new ProductRepository(psc);
 
             Product p = pr.Retrieve("1");
-            p.Prijs = p.Prijs + 4;       
+            p.Prijs = p.Prijs + 4;
             pr.Create(p);
-
-
         }
 
         [TestMethod]
         public void Retrieve()
         {
-
             ProductSQLContext psc = new ProductSQLContext();
             ProductRepository pr = new ProductRepository(psc);
 
             Product p = pr.Retrieve("1");
             Assert.IsTrue(p.Id == 1);
             Assert.IsTrue(p.Titel == "Test");
-       
-
-
         }
 
         [TestMethod]
@@ -46,8 +39,7 @@ namespace WebshopASP.Tests
 
             List<Product> producten = pr.RetrieveAll();
 
-              Assert.IsTrue(producten.Count > 0);
-
+            Assert.IsTrue(producten.Count > 0);
         }
 
         [TestMethod]
@@ -56,10 +48,9 @@ namespace WebshopASP.Tests
             ProductSQLContext psc = new ProductSQLContext();
             ProductRepository pr = new ProductRepository(psc);
 
-
             Product p = pr.Retrieve("1");
             p.Prijs = p.Prijs + 4;
-           // p.KortingId = 5;
+            // p.KortingId = 5;
             pr.Update(p);
         }
 

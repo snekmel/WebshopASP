@@ -21,7 +21,6 @@ namespace WebshopASP
              defaults: new { controller = "Product", action = "Product", id = UrlParameter.Optional }
             );
 
-
             routes.MapRoute(
 name: "Account/Settings",
 url: "Account/Settings",
@@ -39,7 +38,6 @@ name: "LoginPost",
 url: "Auth/Post",
 defaults: new { controller = "Auth", action = "LoginPost" }
 );
-
 
             routes.MapRoute(
   name: "Login",

@@ -47,24 +47,15 @@ namespace DalWebshop.Repositorys.DAL.Context
                         var reader2 = cmd.ExecuteReader();
                         while (reader2.Read())
                         {
-
                             if (!reader.IsDBNull(1))
                             {
-
                                 ProductSQLContext psc = new ProductSQLContext();
                                 ProductRepository pr = new ProductRepository(psc);
 
                                 returnOrder.Producten.Add(pr.Retrieve(reader.GetInt32(1).ToString()));
-
                             }
-
-
                         }
                     }
-
-
-
-                
 
                     con.Close();
                 }

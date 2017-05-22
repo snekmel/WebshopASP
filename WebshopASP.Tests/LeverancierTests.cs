@@ -47,10 +47,8 @@ namespace WebshopASP.Tests
             Leverancier l = lr.Retrieve("2");
 
             l.Naam = l.Naam + "AAngepast";
-            
+
             lr.Update(l);
-
-
         }
 
         [TestMethod]

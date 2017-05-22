@@ -51,18 +51,17 @@ namespace DalWebshop.Models
 
         public string SaveOrUpdate()
         {
-
             GebruikerSQLContext gsc = new GebruikerSQLContext();
             GebruikerRepository gr = new GebruikerRepository(gsc);
 
             if (Id != null)
             {
-               gr.Update(this);
+                gr.Update(this);
                 return this.Id.ToString();
             }
             else
             {
-             return gr.Create(this);
+                return gr.Create(this);
             }
         }
 

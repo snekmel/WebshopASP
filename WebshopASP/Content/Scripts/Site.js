@@ -1,9 +1,5 @@
-﻿
-$(document).foundation();
-
+﻿$(document).foundation();
 
 $(document).ready(function () {
     $('#productTable').DataTable();
 });
-
-

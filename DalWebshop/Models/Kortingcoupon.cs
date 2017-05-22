@@ -2,10 +2,9 @@
 {
     public class Kortingcoupon
     {
-
         public int Id { get; private set; }
-        public string Code { get;  set; }
-        public int Kortingspercentage { get;  set; }
+        public string Code { get; set; }
+        public int Kortingspercentage { get; set; }
 
         public Kortingcoupon(int id, string code, int kortingspercentage)
         {
@@ -14,9 +13,8 @@
             Kortingspercentage = kortingspercentage;
         }
 
-        public Kortingcoupon( string code, int kortingspercentage)
+        public Kortingcoupon(string code, int kortingspercentage)
         {
-            
             Code = code;
             Kortingspercentage = kortingspercentage;
         }

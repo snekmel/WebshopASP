@@ -3,7 +3,6 @@ using DalWebshop.Repositorys.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using DalWebshop.Repositorys.DAL;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {
@@ -123,7 +122,6 @@ namespace DalWebshop.Repositorys.DAL.Context
                     cmd.Parameters.AddWithValue("@telefoonnummer", obj.Telefoonnummer);
                     cmd.Parameters.AddWithValue("@email", obj.Email);
                     cmd.Parameters.AddWithValue("@key", obj.Id);
-
 
                     cmd.ExecuteNonQuery();
                     con.Close();

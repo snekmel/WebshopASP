@@ -1,20 +1,21 @@
-﻿using System.Collections.Generic;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys.DAL.Interfaces;
+using System.Collections.Generic;
 
 namespace DalWebshop.Repositorys
 {
     public class LeverancierRepository
     {
         private IMaintanable<Leverancier> _crudInterface;
-        public LeverancierRepository(IMaintanable<Leverancier> i )
+
+        public LeverancierRepository(IMaintanable<Leverancier> i)
         {
             _crudInterface = i;
         }
 
         public string Create(Leverancier obj)
         {
-           return _crudInterface.Create(obj);
+            return _crudInterface.Create(obj);
         }
 
         public Leverancier Retrieve(string key)
@@ -36,8 +37,5 @@ namespace DalWebshop.Repositorys
         {
             _crudInterface.Delete(key);
         }
-
-
-
     }
 }

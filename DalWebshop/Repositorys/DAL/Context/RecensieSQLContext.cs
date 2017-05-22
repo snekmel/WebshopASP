@@ -56,7 +56,7 @@ namespace DalWebshop.Repositorys.DAL.Context
 
                     while (reader.Read())
                     {
-                        returnRecensie = new Recensie(reader.GetInt32(0), reader.GetString(1),Convert.ToBoolean(reader.GetInt32(2)), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5));
+                        returnRecensie = new Recensie(reader.GetInt32(0), reader.GetString(1), Convert.ToBoolean(reader.GetInt32(2)), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5));
                     }
                     con.Close();
                 }
@@ -79,7 +79,6 @@ namespace DalWebshop.Repositorys.DAL.Context
                 {
                     string query = "Select * from Recensie";
                     SqlCommand cmd = new SqlCommand(query, con);
-                 
 
                     con.Open();
 
@@ -87,7 +86,7 @@ namespace DalWebshop.Repositorys.DAL.Context
 
                     while (reader.Read())
                     {
-                       Recensie r = new Recensie(reader.GetInt32(0), reader.GetString(1), Convert.ToBoolean(reader.GetInt32(2)), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5));
+                        Recensie r = new Recensie(reader.GetInt32(0), reader.GetString(1), Convert.ToBoolean(reader.GetInt32(2)), reader.GetInt32(3), reader.GetInt32(4), reader.GetInt32(5));
                         returnList.Add(r);
                     }
                     con.Close();
@@ -101,7 +100,7 @@ namespace DalWebshop.Repositorys.DAL.Context
                 throw;
             }
         }
-       
+
         public void Update(Recensie obj)
         {
             try

@@ -9,10 +9,8 @@ namespace DalWebshop.Models
         public DateTime Date { get; private set; }
         public int GebruikerId { get; private set; }
 
-
-        public Kortingcoupon Kortingcoupon { get;  set; }
-        public List<Product> Producten { get;  set; }
-
+        public Kortingcoupon Kortingcoupon { get; set; }
+        public List<Product> Producten { get; set; }
 
         public Order(int id, DateTime date, int gebruikerId)
         {
@@ -21,12 +19,12 @@ namespace DalWebshop.Models
             GebruikerId = gebruikerId;
             Producten = new List<Product>();
         }
+
         public Order(int gebruikerId)
         {
             GebruikerId = gebruikerId;
             Date = DateTime.Now;
             Producten = new List<Product>();
         }
-
     }
 }

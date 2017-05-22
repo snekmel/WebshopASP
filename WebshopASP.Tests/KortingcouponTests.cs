@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys;
 using DalWebshop.Repositorys.DAL.Context;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace WebshopASP.Tests
 {
@@ -16,22 +15,17 @@ namespace WebshopASP.Tests
             KortingcouponSQLContext ksc = new KortingcouponSQLContext();
             KortingCouponRepository kcr = new KortingCouponRepository(ksc);
             Kortingcoupon k = kcr.Retrieve("1");
-
-            
-
         }
 
         [TestMethod]
         public void Retrieve()
         {
-
             KortingcouponSQLContext ksc = new KortingcouponSQLContext();
             KortingCouponRepository kcr = new KortingCouponRepository(ksc);
 
             Kortingcoupon k = kcr.Retrieve("1");
 
             Assert.AreEqual("Zomer10", k.Code);
-
         }
 
         [TestMethod]
@@ -43,15 +37,11 @@ namespace WebshopASP.Tests
             List<Kortingcoupon> lijst = kcr.RetrieveAll();
 
             Assert.AreEqual("Zomer10", lijst[0].Code);
-
         }
-        
 
-        
         [TestMethod]
         public void Update()
         {
-
             KortingcouponSQLContext ksc = new KortingcouponSQLContext();
             KortingCouponRepository kcr = new KortingCouponRepository(ksc);
 
@@ -60,8 +50,8 @@ namespace WebshopASP.Tests
             k.Kortingspercentage = 20;
 
             kcr.Update(k);
-
         }
+
         [TestMethod]
         public void Delete()
         {

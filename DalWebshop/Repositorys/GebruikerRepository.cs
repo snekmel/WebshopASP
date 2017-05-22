@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys.DAL.Interfaces;
+using System.Collections.Generic;
 
 namespace DalWebshop.Repositorys
 {
@@ -37,6 +37,5 @@ namespace DalWebshop.Repositorys
         {
             _crudInterface.Delete(key);
         }
-
     }
 }

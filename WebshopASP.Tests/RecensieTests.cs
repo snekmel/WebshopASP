@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys;
 using DalWebshop.Repositorys.DAL.Context;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace WebshopASP.Tests
 {
@@ -15,14 +15,10 @@ namespace WebshopASP.Tests
             RecensieSQLContext rcs = new RecensieSQLContext();
             RecensieRepository rr = new RecensieRepository(rcs);
 
-
             Recensie r = rr.Retrieve("1");
             r.GebruikerId = 2;
 
-          //  rr.Create(r);
-
-
-
+            //  rr.Create(r);
         }
 
         [TestMethod]
@@ -45,8 +41,8 @@ namespace WebshopASP.Tests
 
             List<Recensie> lijst = rr.RetrieveAll();
 
-          Assert.IsTrue(lijst[0].Score == 7);
-            Assert.IsTrue(lijst[0].ProductId == 1);  
+            Assert.IsTrue(lijst[0].Score == 7);
+            Assert.IsTrue(lijst[0].ProductId == 1);
         }
 
         [TestMethod]
@@ -55,9 +51,8 @@ namespace WebshopASP.Tests
             RecensieSQLContext rcs = new RecensieSQLContext();
             RecensieRepository rr = new RecensieRepository(rcs);
             Recensie r = rr.Retrieve("2");
-            r.Opmerking = r.Opmerking + " aangepast";  
-          //  rr.Update(r);
-
+            r.Opmerking = r.Opmerking + " aangepast";
+            //  rr.Update(r);
         }
 
         [TestMethod]

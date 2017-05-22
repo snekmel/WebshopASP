@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys.DAL.Interfaces;
-using System.Data.SqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {

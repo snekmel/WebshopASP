@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Web;
-using System.Web.Mvc;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys;
+using System.Web.Mvc;
 
 namespace WebshopASP.Controllers
 {
@@ -20,10 +15,8 @@ namespace WebshopASP.Controllers
         public ActionResult Logout()
         {
             Session["AuthGebruiker"] = null;
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
-
-
 
         // Get :Register
         public ActionResult Register()
@@ -35,9 +28,9 @@ namespace WebshopASP.Controllers
         [HttpPost]
         public ActionResult RegisterPost(FormCollection form)
         {
+            Gebruiker newUser = new Gebruiker(form["Email"], form["Password"], form["Name"], form["Lastname"], false, form["Street"], form["HouseNumeber"], form["Zipcode"], form["Country"], form["City"]);
 
-         Gebruiker newUser = new Gebruiker(form["Email"],form["Password"], form["Name"],form["Lastname"],false,form["Street"],form["HouseNumeber"],form["Zipcode"],form["Country"],form["City"]);
-         string id = newUser.SaveOrUpdate();
+            string id = newUser.SaveOrUpdate();
 
             if (id == null)
             {
@@ -50,13 +43,11 @@ namespace WebshopASP.Controllers
             return View("~/Views/Auth/Register.cshtml");
         }
 
-
-
         // POST: Login
         [HttpPost]
         public ActionResult LoginPost(FormCollection form)
         {
-        Gebruiker user = AuthRepository.CheckAuth(form["Email"], form["Password"]);
+            Gebruiker user = AuthRepository.CheckAuth(form["Email"], form["Password"]);
 
             if (user != null)
             {

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys.DAL.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DalWebshop.Repositorys
 {
@@ -32,17 +31,14 @@ namespace DalWebshop.Repositorys
             return _interface.Create(obj);
         }
 
-
         public List<Recensie> RetrieveAll()
         {
             return _interface.RetrieveAll();
         }
 
-
         public Recensie Retrieve(string key)
         {
             return _interface.Retrieve(key);
-
         }
 
         public void Update(Recensie obj)

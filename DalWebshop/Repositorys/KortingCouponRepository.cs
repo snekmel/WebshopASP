@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using DalWebshop.Models;
+﻿using DalWebshop.Models;
 using DalWebshop.Repositorys.DAL.Interfaces;
+using System.Collections.Generic;
 
 namespace DalWebshop.Repositorys
 {
     public class KortingCouponRepository
     {
-
         private IMaintanable<Kortingcoupon> _crudInterface;
 
-        public KortingCouponRepository(IMaintanable<Kortingcoupon> i )
+        public KortingCouponRepository(IMaintanable<Kortingcoupon> i)
         {
             _crudInterface = i;
         }

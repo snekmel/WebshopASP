@@ -10,6 +10,18 @@ namespace WebshopASP
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+        name: "AddOrderRow",
+       url: "Shoppingcart/Add/{id}",
+       defaults: new { controller = "Order", action = "Add", id = UrlParameter.Optional }
+      );
+
+            routes.MapRoute(
+name: "RemoveOrderRow",
+url: "Shoppingcart/Remove/{id}",
+defaults: new { controller = "Order", action = "Remove", id = UrlParameter.Optional }
+);
+
+            routes.MapRoute(
                 name: "Products",
                 url: "Products",
                 defaults: new { controller = "Product", action = "Index" }
@@ -55,6 +67,12 @@ defaults: new { controller = "Auth", action = "Register" }
 name: "Logout",
 url: "Logout",
 defaults: new { controller = "Auth", action = "Logout" }
+);
+
+            routes.MapRoute(
+name: "Shoppingcart",
+url: "Shoppingcart",
+defaults: new { controller = "Order", action = "Shoppingcart" }
 );
 
             routes.MapRoute(

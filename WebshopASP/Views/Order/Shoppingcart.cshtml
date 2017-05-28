@@ -1,0 +1,83 @@
+﻿@using DalWebshop.Models
+@using System.Web.UI.WebControls
+
+@{
+    ViewBag.Title = "Shoppingcart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Order CartOrder = (Order)Session["CartOrder"];
+}
+<br />
+<div class="row">
+    <div class="large-12 columns">
+        <h3><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shoppingcart</h3>
+        <hr class="maxWidth" />
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="large-12 columns maxWidth">
+        <table class="unstriped maxWidth">
+            <thead>
+                <tr>
+                    <th width="20%%">Image</th>
+                    <th width="50%">Product</th>
+                    <th width="15%">Price</th>
+                    <th width="10%">Amount</th>
+                    <th width="10%">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (CartOrder.Producten.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5">The shoppingcart appears to be empty!</td>
+                    </tr>
+                }
+                @foreach (OrderRow p in CartOrder.Producten)
+                {
+                    <tr>
+                        <td>Image</td>
+                        <td>@p.ProductInformatie().Titel</td>
+                        <td>@p.ProductInformatie().Prijs</td>
+                        <td>
+                            <input type="text" id="@p.ProductId" class="aantalTb" value="@p.Aantal" />
+                        </td>
+                        <td>
+                            <a href="/Shoppingcart/Remove/@p.ProductId" class="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h3 class="float-right"> Total: @CartOrder.TotaalPrijs()</h3>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="large-12 columns maxWidth">
+        <div class="large-6 columns stickToBottom">
+
+            @if (CartOrder.Kortingcoupon == null)
+            {
+
+                <form action="/Order/Coupon" method="post">
+
+                    <input type="text" name="kortingCoupon" placeholder="DiscountCode" />
+                    <button type="submit" class="info button">Check coupon</button>
+                </form>
+
+            }
+            else
+            {
+                <div class="callout primary">
+                    <h5>@CartOrder.Kortingcoupon.Code</h5>
+                    <p>Discount by using this coupon: @CartOrder.Kortingcoupon.Kortingspercentage %</p>
+                </div>
+            }
+        </div>
+        <div class="large-6 columns stickToBottom">
+            <button type="button" class="info button maxWidth stickToBottom">Order</button>
+        </div>
+    </div>
+</div>

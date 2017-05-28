@@ -28,19 +28,19 @@ namespace WebshopASP.Controllers
         [HttpPost]
         public ActionResult RegisterPost(FormCollection form)
         {
-            Gebruiker newUser = new Gebruiker(form["Email"], form["Password"], form["Name"], form["Lastname"], false, form["Street"], form["HouseNumeber"], form["Zipcode"], form["Country"], form["City"]);
+            Gebruiker newUser = new Gebruiker(form["Email"], form["Password"], form["Name"], form["Lastname"], false, form["Street"], form["HouseNumber"], form["Zipcode"], form["Country"], form["City"]);
 
             string id = newUser.SaveOrUpdate();
 
             if (id == null)
             {
                 ViewBag.RegisterResult = false;
+                return View("~/Views/Auth/Register.cshtml");
             }
             else
             {
-                ViewBag.RegisterResult = true;
+                return Login();
             }
-            return View("~/Views/Auth/Register.cshtml");
         }
 
         // POST: Login

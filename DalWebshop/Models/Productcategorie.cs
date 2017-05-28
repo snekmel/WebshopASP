@@ -1,4 +1,8 @@
-﻿namespace DalWebshop.Models
+﻿using DalWebshop.Repositorys;
+using DalWebshop.Repositorys.DAL.Context;
+using System.Collections.Generic;
+
+namespace DalWebshop.Models
 {
     public class Productcategorie
     {
@@ -21,6 +25,37 @@
             Hoofdcategorie = hoofdcategorie;
             Naam = naam;
             Omschrijving = omschrijving;
+        }
+
+        public void SaveOrUpdate()
+        {
+            ProductcategorieSQLContext psc = new ProductcategorieSQLContext();
+            ProductCategorieRepository pr = new ProductCategorieRepository(psc);
+
+            if (Id != 0)
+            {
+                pr.Update(this);
+            }
+            else
+            {
+                pr.Create(this);
+            }
+        }
+
+        public static List<Productcategorie> All()
+        {
+            ProductcategorieSQLContext psc = new ProductcategorieSQLContext();
+            ProductCategorieRepository pr = new ProductCategorieRepository(psc);
+
+            return pr.RetrieveAll();
+        }
+
+        public static Productcategorie Find(string key)
+        {
+            ProductcategorieSQLContext psc = new ProductcategorieSQLContext();
+            ProductCategorieRepository pr = new ProductCategorieRepository(psc);
+
+            return pr.Retrieve(key);
         }
     }
 }

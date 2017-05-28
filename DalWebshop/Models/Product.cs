@@ -11,10 +11,8 @@ namespace DalWebshop.Models
         public string Omschrijving { get; set; }
         public int Voorraad { get; set; }
         public decimal Prijs { get; set; }
-
         public int KortingId { get; set; }
         public int LeverancierId { get; private set; }
-
         public int ProductCategorieId { get; set; }
 
         public Product(int id, string titel, string omschrijving, int voorraad, decimal prijs, int leverancierId, int productCategorieId)
@@ -66,13 +64,16 @@ namespace DalWebshop.Models
         //-----------------------------------------------------------Fat Model----------------------------------------------------
         public void SaveOrUpdate()
         {
-            if (Id != null)
+            ProductSQLContext psc = new ProductSQLContext();
+            ProductRepository pr = new ProductRepository(psc);
+
+            if (Id != 0)
             {
-                //update
+                pr.Update(this);
             }
             else
             {
-                //save
+                pr.Create(this);
             }
         }
 

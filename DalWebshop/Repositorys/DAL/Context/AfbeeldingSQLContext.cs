@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {
-    public class AfbeeldingSQLContext : IMaintanable<Afbeelding>
+    public class AfbeeldingSQLContext : IAfbeelding
     {
         public string Create(Afbeelding obj)
         {
@@ -13,6 +13,11 @@ namespace DalWebshop.Repositorys.DAL.Context
         }
 
         public Afbeelding Retrieve(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Afbeelding> RetrieveAll()
         {
             throw new NotImplementedException();
         }
@@ -27,7 +32,7 @@ namespace DalWebshop.Repositorys.DAL.Context
             throw new NotImplementedException();
         }
 
-        public List<Afbeelding> RetrieveAll()
+        public List<Afbeelding> GetAfbeeldingByOrderId()
         {
             throw new NotImplementedException();
         }

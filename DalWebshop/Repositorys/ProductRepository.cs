@@ -6,36 +6,36 @@ namespace DalWebshop.Repositorys
 {
     public class ProductRepository
     {
-        private IMaintanable<Product> _crudInterface;
+        private IProduct _interface;
 
-        public ProductRepository(IMaintanable<Product> i)
+        public ProductRepository(IProduct i)
         {
-            _crudInterface = i;
+            _interface = i;
         }
 
         public string Create(Product obj)
         {
-            return _crudInterface.Create(obj);
+            return _interface.Create(obj);
         }
 
         public Product Retrieve(string key)
         {
-            return _crudInterface.Retrieve(key);
+            return _interface.Retrieve(key);
         }
 
         public List<Product> RetrieveAll()
         {
-            return _crudInterface.RetrieveAll();
+            return _interface.RetrieveAll();
         }
 
         public void Update(Product obj)
         {
-            _crudInterface.Update(obj);
+            _interface.Update(obj);
         }
 
         public void Delete(string key)
         {
-            _crudInterface.Delete(key);
+            _interface.Delete(key);
         }
     }
 }

@@ -6,67 +6,92 @@ using System.Data.SqlClient;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {
-    internal class OrderSQLContext : IMaintanable<Order>
+    public class OrderSQLContext : IOrder
     {
-        public string Create(Order obj)
+        private List<OrderRow> RetrieveOrderRow()
         {
-            throw new NotImplementedException();
-        }
-
-        public Order Retrieve(string key)
-        {
-            Order returnOrder = null;
+            List<OrderRow> returnList = new List<OrderRow>();
             try
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "Select * from Product where id = @key";
+                    string query = "SELECT *  Order_Product";
                     SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@key", key);
-
-                    string query2 = "Select * from Order_Product where orderId = @orderId";
-                    SqlCommand cmd2 = new SqlCommand(query2, con);
-
                     con.Open();
-
                     var reader = cmd.ExecuteReader();
-
                     while (reader.Read())
                     {
-                        returnOrder = new Order(reader.GetInt32(0), reader.GetDateTime(1), reader.GetInt32(2));
-                        if (!reader.IsDBNull(4))
-                        {
-                            KortingcouponSQLContext ksc = new KortingcouponSQLContext();
-                            KortingCouponRepository kcr = new KortingCouponRepository(ksc);
-
-                            returnOrder.Kortingcoupon = kcr.Retrieve("4");
-                        }
-
-                        cmd.Parameters.AddWithValue("@orderId", returnOrder.Id);
-
-                        var reader2 = cmd.ExecuteReader();
-                        while (reader2.Read())
-                        {
-                            if (!reader.IsDBNull(1))
-                            {
-                                ProductSQLContext psc = new ProductSQLContext();
-                                ProductRepository pr = new ProductRepository(psc);
-
-                                returnOrder.Producten.Add(pr.Retrieve(reader.GetInt32(1).ToString()));
-                            }
-                        }
+                        OrderRow or = new OrderRow(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2));
+                        returnList.Add(or);
                     }
-
                     con.Close();
                 }
 
-                return returnOrder;
+                return returnList;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        private void SaveOrderRow(OrderRow row)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Env.ConString))
+                {
+                    string query = "INSERT INTO Order_Product (orderId ,productId ,aantal) VALUES (@orderId ,@productId ,@aantal)";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@orderId", row.OrderId);
+                    cmd.Parameters.AddWithValue("@productId", row.ProductId);
+                    cmd.Parameters.AddWithValue("@aantal", row.Aantal);
+
+                    con.Open();
+                    cmd.ExecuteReader();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public string Create(Order obj)
+        {
+            int orderId = 0;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Env.ConString))
+                {
+                    string query = "INSERT INTO [Order] (datum ,gebruikerId ,kortingcouponId) VALUES (datum, gebruikerId,kortingcouponId);SELECT CAST(scope_identity() AS int);";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    con.Open();
+                    orderId = (int)cmd.ExecuteScalar();
+                    foreach (OrderRow or in obj.Producten)
+                    {
+                        or.OrderId = orderId;
+                        this.SaveOrderRow(or);
+                    }
+
+                    con.Close();
+                }
+
+                return orderId.ToString();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public Order Retrieve(string key)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Order> RetrieveAll()

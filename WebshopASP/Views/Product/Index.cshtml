@@ -1,5 +1,9 @@
-﻿@{
+﻿@using DalWebshop.Models
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var categories = @ViewBag.Categories;
+    var products = @ViewBag.products;
 }
 <div class="row">
     <div class="large-2 columns">
@@ -8,63 +12,27 @@
             <li><a href="#">Newest first</a></li>
             <li><a href="#">Popular first</a></li>
             <li class="divider"></li>
-            <li><a href="#">Categorie1</a></li>
+
+            @foreach (Productcategorie p in categories)
+            {
+                <li><a href="">@p.Naam</a></li>
+            }
         </ul>
     </div>
     <div class="large-10 columns">
 
-        <div class="row">
+        @foreach (Product p in products)
+        {
             <div class="small-2 large-4 columns">
                 <div class="column">
                     <img class="thumbnail" src="http://placehold.it/300x400">
-                    <h5>Nulla At Nulla Justo, Eget</h5>
-                    <p>$400</p>
-                    <a href="#" class="button expanded">Buy</a>
+                    <h5>@p.Titel</h5>
+                    <p>@p.Prijs</p>
+                    <a href="/Product/@p.Id" class="button expanded success">Info</a>
+                    <a href="/Shoppingcart/Add/@p.Id" class="button expanded">Add to cart</a>
                 </div>
             </div>
-            <div class="small-2 large-4 columns">
-                <div class="column">
-                    <img class="thumbnail" src="http://placehold.it/300x400">
-                    <h5>Nulla At Nulla Justo, Eget</h5>
-                    <p>$400</p>
-                    <a href="#" class="button expanded">Buy</a>
-                </div>
-            </div>
-            <div class="small-2 large-4 columns">
-                <div class="column">
-                    <img class="thumbnail" src="http://placehold.it/300x400">
-                    <h5>Nulla At Nulla Justo, Eget</h5>
-                    <p>$400</p>
-                    <a href="#" class="button expanded">Buy</a>
-                </div>
-            </div>
-        </div>
+        }
 
-        <div class="row">
-            <div class="small-2 large-4 columns">
-                <div class="column">
-                    <img class="thumbnail" src="http://placehold.it/300x400">
-                    <h5>Nulla At Nulla Justo, Eget</h5>
-                    <p>$400</p>
-                    <a href="#" class="button expanded">Buy</a>
-                </div>
-            </div>
-            <div class="small-2 large-4 columns">
-                <div class="column">
-                    <img class="thumbnail" src="http://placehold.it/300x400">
-                    <h5>Nulla At Nulla Justo, Eget</h5>
-                    <p>$400</p>
-                    <a href="#" class="button expanded">Buy</a>
-                </div>
-            </div>
-            <div class="small-2 large-4 columns">
-                <div class="column">
-                    <img class="thumbnail" src="http://placehold.it/300x400">
-                    <h5>Nulla At Nulla Justo, Eget</h5>
-                    <p>$400</p>
-                    <a href="#" class="button expanded">Buy</a>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

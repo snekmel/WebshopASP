@@ -3,4 +3,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Settings</h2>
+<div class="row">
+
+    <h2 class="center">Account Settings</h2>
+    <ul class="tabs" data-tabs id="example-tabs">
+        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Account Information</a></li>
+        <li class="tabs-title"><a href="#panel2">Change Password</a></li>
+    </ul>
+
+    <div class="tabs-content" data-tabs-content="example-tabs">
+        <div class="tabs-panel is-active" id="panel1">
+            <div id="registerForm" class="row">
+                <div class="large-4 columns">
+                    @Html.TextBox("Email", "", new { @placeholder = "Email", required = "required" })
+                    @Html.TextBox("Name", "", new { @placeholder = "Name", required = "required" })
+                    @Html.TextBox("Lastname", "", new { @placeholder = "Lastname", required = "required" })
+                    @Html.TextBox("Password", "", new { @placeholder = "Password", required = "required" })
+                    @Html.TextBox("Password2", "", new { @placeholder = "Password", required = "required" })
+                </div>
+                <div class="large-8 columns">
+                    <div class="large-8 columns">
+                        @Html.TextBox("Street", "", new { @placeholder = "Street", required = "required" })
+                        @Html.TextBox("Zipcode", "", new { @placeholder = "Zipcode", required = "required" })
+                        @Html.TextBox("City", "", new { @placeholder = "City", required = "required" })
+                        @Html.TextBox("Country", "", new { @placeholder = "Country", required = "required" })
+                    </div>
+                    <div class="large-4 columns">
+                        @Html.TextBox("HouseNumber", "", new { @placeholder = "HouseNumber", required = "required" })
+                    </div>
+                </div>
+            </div>
+            <div id="createAccountbtn" class="row">
+                <div class="large-12 columns">
+                    <input class="button expanded success" type="submit" value="Update Account" />
+                </div>
+            </div>
+
+
+        </div>
+        <div class="tabs-panel" id="panel2">
+            
+            <form action="" method="post">
+                <input type="password" placeholder="Old Password" name="oldPassword" />
+                <input type="text" placeholder="New Password" name="newPassword" />
+                <input type="text" placeholder="Validate new Password" name="validateNewPassword" />
+                <input class="button expanded success" type="submit" value="Change password" />
+            </form>
+        
+
+
+        </div>
+    </div>
+    
+
+</div>

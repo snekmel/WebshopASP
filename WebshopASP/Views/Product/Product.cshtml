@@ -3,21 +3,11 @@
 @{
     ViewBag.Title = "Product";
     Product p = ViewBag.Product;
+    List<Recensie> recensies = ViewBag.Recensies;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row columns">
-    <nav aria-label="You are here:" role="navigation">
-        <ul class="breadcrumbs">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Features</a></li>
-            <li class="disabled">Gene Splicing</li>
-            <li>
-                <span class="show-for-sr">Current: </span> Cloning
-            </li>
-        </ul>
-    </nav>
-</div>
+<br />
 <div class="row">
     <div class="medium-6 columns">
         <img class="thumbnail" src="http://placehold.it/650x350">
@@ -50,26 +40,16 @@
                 <option value="apollo">Yeti</option>
             </select>
         </label>
-            -->
+        -->
         <div class="row">
 
-            <div class="small-9 columns">
+            <div class="small-12 columns">
                 <label for="middle-label" class="middle">In Warehouse : @p.Voorraad</label>
             </div>
-
-            <div class="small-3 columns">
-                <label for="middle-label" class="middle">Quantity</label>
-            </div>
-            <div class="small-3 columns">
-                <input type="text" id="middle-label" placeholder="One fish two fish">
-            </div>
         </div>
-        <a href="#" class="button large expanded">Buy Now</a>
-        <div class="small secondary expanded button-group">
-            <a class="button">Facebook</a>
-            <a class="button">Twitter</a>
-            <a class="button">Yo</a>
-        </div>
+        <span id="btnBuynow">
+            <a href="/Shoppingcart/Add/@p.Id" class="button large expanded bottom">Buy Now</a>
+        </span>
     </div>
 </div>
 <div class="column row">
@@ -81,39 +61,27 @@
     <div class="tabs-content" data-tabs-content="example-tabs">
         <div class="tabs-panel is-active" id="panel1">
             <h4>Reviews</h4>
-            <div class="media-object stack-for-small">
-                <div class="media-object-section">
-                    <img class="thumbnail" src="http://placehold.it/200x200">
+
+            @foreach (Recensie r in recensies)
+            {
+                <div class="media-object stack-for-small">
+                    <div class="media-object-section">
+                        <img class="thumbnail" src="http://placehold.it/200x200">
+                    </div>
+                    <div class="media-object-section">
+                        <h5>@r.GebruikerId</h5>
+                        <p>@r.Opmerking</p>
+                    </div>
                 </div>
-                <div class="media-object-section">
-                    <h5>Mike Stevenson</h5>
-                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you.</p>
-                </div>
-            </div>
-            <div class="media-object stack-for-small">
-                <div class="media-object-section">
-                    <img class="thumbnail" src="http://placehold.it/200x200">
-                </div>
-                <div class="media-object-section">
-                    <h5>Mike Stevenson</h5>
-                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you</p>
-                </div>
-            </div>
-            <div class="media-object stack-for-small">
-                <div class="media-object-section">
-                    <img class="thumbnail" src="http://placehold.it/200x200">
-                </div>
-                <div class="media-object-section">
-                    <h5>Mike Stevenson</h5>
-                    <p>I'm going to improvise. Listen, there's something you should know about me... about inception. An idea is like a virus, resilient, highly contagious. The smallest seed of an idea can grow. It can grow to define or destroy you</p>
-                </div>
-            </div>
+            }
+
             <label>
                 My Review
                 <textarea placeholder="None"></textarea>
             </label>
             <button class="button">Submit Review</button>
         </div>
+
         <div class="tabs-panel" id="panel2">
             <div class="row medium-up-3 large-up-5">
                 <div class="column">

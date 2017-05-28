@@ -37,5 +37,20 @@ namespace DalWebshop.Repositorys
         {
             _crudInterface.Delete(key);
         }
+
+        public Kortingcoupon RetrieveByCode(string code)
+        {
+            Kortingcoupon result = null;
+
+            foreach (Kortingcoupon k in this.RetrieveAll())
+            {
+                if (k.Code == code)
+                {
+                    result = k;
+                }
+            }
+
+            return result;
+        }
     }
 }

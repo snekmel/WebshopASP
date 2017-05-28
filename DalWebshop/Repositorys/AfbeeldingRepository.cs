@@ -1,13 +1,12 @@
-﻿using DalWebshop.Models;
-using DalWebshop.Repositorys.DAL.Interfaces;
+﻿using DalWebshop.Repositorys.DAL.Interfaces;
 
 namespace DalWebshop.Repositorys
 {
     public class AfbeeldingRepository
     {
-        private IMaintanable<Afbeelding> _interface;
+        private IAfbeelding _interface;
 
-        public AfbeeldingRepository(IMaintanable<Afbeelding> i)
+        public AfbeeldingRepository(IAfbeelding i)
         {
             _interface = i;
         }

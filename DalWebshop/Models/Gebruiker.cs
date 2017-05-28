@@ -47,14 +47,12 @@ namespace DalWebshop.Models
             Woonplaats = woonplaats;
         }
 
-        //------------ Fat model
-
         public string SaveOrUpdate()
         {
             GebruikerSQLContext gsc = new GebruikerSQLContext();
             GebruikerRepository gr = new GebruikerRepository(gsc);
 
-            if (Id != null)
+            if (Id != 0)
             {
                 gr.Update(this);
                 return this.Id.ToString();

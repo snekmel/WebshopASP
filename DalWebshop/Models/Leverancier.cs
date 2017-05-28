@@ -1,4 +1,8 @@
-﻿namespace DalWebshop.Models
+﻿using DalWebshop.Repositorys;
+using DalWebshop.Repositorys.DAL.Context;
+using System.Collections.Generic;
+
+namespace DalWebshop.Models
 {
     public class Leverancier
     {
@@ -35,6 +39,37 @@
             Plaats = plaats;
             Telefoonnummer = telefoonnummer;
             Email = email;
+        }
+
+        public void SaveOrUpdate()
+        {
+            LeverancierSQLContext lsc = new LeverancierSQLContext();
+            LeverancierRepository lr = new LeverancierRepository(lsc);
+
+            if (Id != 0)
+            {
+                lr.Update(this);
+            }
+            else
+            {
+                lr.Create(this);
+            }
+        }
+
+        public static List<Leverancier> All()
+        {
+            LeverancierSQLContext lsc = new LeverancierSQLContext();
+            LeverancierRepository lr = new LeverancierRepository(lsc);
+
+            return lr.RetrieveAll();
+        }
+
+        public static Leverancier Find(string key)
+        {
+            LeverancierSQLContext lsc = new LeverancierSQLContext();
+            LeverancierRepository lr = new LeverancierRepository(lsc);
+
+            return lr.Retrieve(key);
         }
     }
 }

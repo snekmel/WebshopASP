@@ -34,12 +34,12 @@ namespace WebshopASP.Tests
         [TestMethod]
         public void RetrieveAll()
         {
-            ProductSQLContext psc = new ProductSQLContext();
-            ProductRepository pr = new ProductRepository(psc);
+            // ProductSQLContext psc = new ProductSQLContext();
+            // ProductRepository pr = new ProductRepository(psc);
 
-            List<Product> producten = pr.RetrieveAll();
+            List<Product> producten = Product.All();
 
-            Assert.IsTrue(producten.Count > 0);
+            Assert.IsTrue(producten.Count == 2);
         }
 
         [TestMethod]

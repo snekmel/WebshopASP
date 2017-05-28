@@ -1,4 +1,8 @@
-﻿namespace DalWebshop.Models
+﻿using DalWebshop.Repositorys;
+using DalWebshop.Repositorys.DAL.Context;
+using System.Collections.Generic;
+
+namespace DalWebshop.Models
 {
     public class Kortingcoupon
     {
@@ -17,6 +21,44 @@
         {
             Code = code;
             Kortingspercentage = kortingspercentage;
+        }
+
+        public void SaveOrUpdate()
+        {
+            KortingcouponSQLContext ksc = new KortingcouponSQLContext();
+            KortingCouponRepository kcr = new KortingCouponRepository(ksc);
+            if (Id != 0)
+            {
+                kcr.Update(this);
+            }
+            else
+            {
+                kcr.Create(this);
+            }
+        }
+
+        public static List<Kortingcoupon> All()
+        {
+            KortingcouponSQLContext ksc = new KortingcouponSQLContext();
+            KortingCouponRepository kcr = new KortingCouponRepository(ksc);
+
+            return kcr.RetrieveAll();
+        }
+
+        public static Kortingcoupon Find(string key)
+        {
+            KortingcouponSQLContext ksc = new KortingcouponSQLContext();
+            KortingCouponRepository kcr = new KortingCouponRepository(ksc);
+
+            return kcr.Retrieve(key);
+        }
+
+        public static Kortingcoupon FindByCode(string code)
+        {
+            KortingcouponSQLContext ksc = new KortingcouponSQLContext();
+            KortingCouponRepository kcr = new KortingCouponRepository(ksc);
+
+            return kcr.RetrieveByCode(code);
         }
     }
 }

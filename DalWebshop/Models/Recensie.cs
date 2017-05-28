@@ -1,4 +1,8 @@
-﻿namespace DalWebshop.Models
+﻿using DalWebshop.Repositorys;
+using DalWebshop.Repositorys.DAL.Context;
+using System.Collections.Generic;
+
+namespace DalWebshop.Models
 {
     public class Recensie
     {
@@ -27,6 +31,53 @@
             Score = score;
             GebruikerId = gebruikerId;
             ProductId = productId;
+        }
+
+        public void SaveOrUpdate()
+        {
+            RecensieSQLContext rcs = new RecensieSQLContext();
+            RecensieRepository rr = new RecensieRepository(rcs);
+
+            if (Id != 0)
+            {
+                rr.Update(this);
+            }
+            else
+            {
+                rr.Create(this);
+            }
+        }
+
+        public static List<Recensie> All()
+        {
+            RecensieSQLContext rcs = new RecensieSQLContext();
+            RecensieRepository rr = new RecensieRepository(rcs);
+
+            return rr.RetrieveAll();
+        }
+
+        public static Recensie Find(string key)
+        {
+            RecensieSQLContext rcs = new RecensieSQLContext();
+            RecensieRepository rr = new RecensieRepository(rcs);
+
+            return rr.Retrieve(key);
+        }
+
+        public static List<Recensie> FindByProductId(int id)
+        {
+            RecensieSQLContext rcs = new RecensieSQLContext();
+            RecensieRepository rr = new RecensieRepository(rcs);
+
+            return rr.RetrieveByProductId(id);
+        }
+
+        public static List<Recensie> FindByGebruikerId(int id)
+        {
+            RecensieSQLContext rcs = new RecensieSQLContext();
+            RecensieRepository rr = new RecensieRepository(rcs);
+
+            return rr.RetrieveByGebruikerId(id);
         }
     }
 }

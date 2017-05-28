@@ -24,3 +24,16 @@
 .removeLayout {
     display: none;
 }
+
+.maxWidth {
+    min-width: 100%;
+}
+
+.stickToBottom {
+    bottom: 0;
+}
+
+#btnBuynow {
+    margin-top: 40%;
+    display: block;
+}

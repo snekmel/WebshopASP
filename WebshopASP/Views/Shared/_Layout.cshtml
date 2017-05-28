@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Webshop (KillerApp)</title>
     @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/font-awesome-4.7.0/css/font-awesome.css")
     <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 </head>
@@ -55,10 +56,9 @@
 
                 @if (AuthUser == null)
             {
-
+                    <li><a href="/Shoppingcart">Shoppingcart</a></li>
                     <li><a href="/Login">Login</a></li>
                     <li><a href="/Register">Create Account</a></li>
-
                 }
                 else
                 {
@@ -67,7 +67,7 @@
             </ul>
         </div>
     </div>
-    @RenderBody();
+    @RenderBody()
 
     <div class="callout large secondary">
         <div class="row">
@@ -95,7 +95,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    @Scripts.Render("~/Content/Scripts/Site.js");
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Scripts/Site.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {
-    public class ProductSQLContext : IMaintanable<Product>
+    public class ProductSQLContext : IProduct
     {
         public string Create(Product obj)
         {
@@ -166,6 +166,11 @@ namespace DalWebshop.Repositorys.DAL.Context
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public List<Product> RetrieveByOrderId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

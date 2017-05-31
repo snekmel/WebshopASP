@@ -20,8 +20,22 @@ namespace WebshopASP.Controllers
         //Get: Manage/Suppliers
         public ActionResult Suppliers()
         {
+            ViewBag.Leveranciers = Leverancier.All();
             return View("~/Views/Manage/Suppliers.cshtml");
         }
+
+        //Get: Manage/Suppliers/{id}
+        public ActionResult Supplier(string id)
+        {
+            ViewBag.Leveranciers = Leverancier.All();
+            ViewBag.Leverancier = Leverancier.Find(id);
+            return View("~/Views/Manage/Suppliers.cshtml");
+        }
+
+
+
+
+
 
         //Get: Manage/Discounts
         public ActionResult Discounts()

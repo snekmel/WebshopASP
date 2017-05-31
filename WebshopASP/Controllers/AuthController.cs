@@ -1,6 +1,7 @@
 ﻿using DalWebshop.Models;
 using DalWebshop.Repositorys;
 using System.Web.Mvc;
+using DalWebshop.Repositorys.DAL.Context;
 
 namespace WebshopASP.Controllers
 {
@@ -41,6 +42,58 @@ namespace WebshopASP.Controllers
             {
                 return Login();
             }
+        }
+
+        //Post: /Auth/Changepassword
+        [HttpPost]
+        public ActionResult Changepassword(FormCollection form)
+        {
+            Gebruiker g = (Gebruiker)Session["AuthGebruiker"];
+
+
+            if (g.Wachtwoord == form["oldPassword"] && (form["newPassword"] == form["validateNewPassword"]))
+            {
+                g.Wachtwoord = form["newPassword"];
+
+                g.SaveOrUpdate();
+                ViewBag.UpdateResult = "true";
+            }
+            else
+            {
+                ViewBag.UpdateResult = "false";
+            }
+
+            return View("~/Views/Account/Settings.cshtml");
+        }
+
+
+
+
+        //Post: /Auth/Update
+        [HttpPost]
+        public ActionResult Update(FormCollection form)
+        {
+            Gebruiker g =(Gebruiker) Session["AuthGebruiker"];
+
+            g.Email = form["Email"];
+            g.Voornaam = form["Name"];
+            g.Achternaam = form["Lastname"];
+            g.Straat = form["Street"];
+            g.Huisnummer = form["HouseNumber"];
+            g.Postcode = form["Zipcode"];
+            g.Woonplaats = form["Country"];
+            g.Land = form["City"];
+
+         string id =   g.SaveOrUpdate();
+
+            if (id != null)
+            {
+                ViewBag.UpdateResult = "true";
+            }
+
+              return View("~/Views/Account/Settings.cshtml");
+
+
         }
 
         // POST: Login

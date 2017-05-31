@@ -46,8 +46,8 @@ namespace WebshopASP.Tests
             GebruikerSQLContext gsc = new GebruikerSQLContext();
             GebruikerRepository gr = new GebruikerRepository(gsc);
 
-            Gebruiker user = gr.Retrieve("2");
-            // user.Voornaam = user.Voornaam + " Aangepast";
+            Gebruiker user = gr.Retrieve("1");
+            user.Voornaam = "aangepast";
             gr.Update(user);
         }
 

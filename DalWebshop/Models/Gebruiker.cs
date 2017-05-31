@@ -52,7 +52,7 @@ namespace DalWebshop.Models
             GebruikerSQLContext gsc = new GebruikerSQLContext();
             GebruikerRepository gr = new GebruikerRepository(gsc);
 
-            if (Id != 0)
+            if ( Id !=0)
             {
                 gr.Update(this);
                 return this.Id.ToString();

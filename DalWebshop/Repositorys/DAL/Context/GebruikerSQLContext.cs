@@ -113,22 +113,23 @@ namespace DalWebshop.Repositorys.DAL.Context
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "UPDATE Gebruiker SET email = @email,wachtwoord = @wachtwoord,voornaam = @voornaam,achternaam = @achternaam,isAdmin = @isAdmin," +
-                                   "straat = @straat,huisnummer = @huisnummer,postcode = @postcode,land = @land, woonplaats = @woonplaats, WHERE id = @id";
+                    string query = "UPDATE Gebruiker SET email = @email, wachtwoord = @wachtwoord, voornaam = @voornaam, achternaam = @achternaam, isAdmin = @isAdmin," +
+                                   "straat = @straat,huisnummer = @huisnummer,postcode = @postcode,land = @land, woonplaats = @woonplaats WHERE id = @id";
                     SqlCommand cmd = new SqlCommand(query, con);
-
-                    con.Open();
                     cmd.Parameters.AddWithValue("@email", obj.Email);
                     cmd.Parameters.AddWithValue("@wachtwoord", obj.Wachtwoord);
                     cmd.Parameters.AddWithValue("@voornaam", obj.Voornaam);
                     cmd.Parameters.AddWithValue("@achternaam", obj.Achternaam);
-                    cmd.Parameters.AddWithValue("@isAdmin", obj.IsAdmin);
+                    cmd.Parameters.AddWithValue("@isAdmin", Convert.ToInt32(obj.IsAdmin));
                     cmd.Parameters.AddWithValue("@straat", obj.Straat);
                     cmd.Parameters.AddWithValue("@huisnummer", obj.Huisnummer);
                     cmd.Parameters.AddWithValue("@postcode", obj.Postcode);
                     cmd.Parameters.AddWithValue("@land", obj.Land);
                     cmd.Parameters.AddWithValue("@woonplaats", obj.Woonplaats);
+                    cmd.Parameters.AddWithValue("@id", obj.Id);
 
+                    con.Open();          
+                    cmd.ExecuteReader();
                     con.Close();
                 }
             }

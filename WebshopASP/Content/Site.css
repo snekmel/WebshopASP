@@ -1,4 +1,9 @@
-﻿#login-form {
+﻿
+body {
+    height: 100%;
+}
+
+#login-form {
     margin-top: 11%;
     margin-bottom: 12%;
 }
@@ -31,9 +36,20 @@
 
 .stickToBottom {
     bottom: 0;
+  
 }
 
 #btnBuynow {
     margin-top: 40%;
     display: block;
+}
+
+.paneel {
+    width: 95%;
+    min-height: 500px;
+    position: relative;
+}
+
+#updateButtons {
+    vertical-align: bottom;
 }

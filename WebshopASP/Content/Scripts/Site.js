@@ -1,7 +1,9 @@
 ﻿$(document).foundation();
 
 $(document).ready(function () {
+    $('#suppliersTable').DataTable();
     $('#productTable').DataTable();
+    $('#updateForm').foundation('open');
 });
 
 $(".aantalTb").change(function() {

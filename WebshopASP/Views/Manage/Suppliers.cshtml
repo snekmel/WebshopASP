@@ -1,6 +1,130 @@
-﻿@{
+﻿@using DalWebshop.Models
+@{
     ViewBag.Title = "Suppliers";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Leverancier> suppliers = ViewBag.Leveranciers;
+    Leverancier supplier = ViewBag.Leverancier;
 }
 
-<h2>Suppliers</h2>
+<div class="row text-center">
+    <br />
+    <h2>Suppliers</h2>
+
+    <table id="suppliersTable" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phonenumber</th>
+            <th>Email</th>
+            <th>Open</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phonenumber</th>
+            <th>Email</th>
+            <th>Open</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        @foreach (Leverancier l in suppliers)
+        {
+            <tr>
+                <td>@l.Id</td>
+                <td>@l.Naam</td>
+                <td>@l.Telefoonnummer</td>
+                <td>@l.Email</td>     
+                <td><a href="@Url.Content("~/Manage/Supplier/")@l.Id" class="button"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br/>
+</div>
+
+@if (supplier != null)
+{
+    <div class="large reveal" style="height: 75%" id="updateForm"   data-reveal data-options="close_on_background_click:false;close_on_esc:false;">
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div class="row">
+
+            <ul class="tabs" data-tabs id="example-tabs">
+                <li class="tabs-title is-active"><a href="#SupplierInfo" aria-selected="true">Supplier Information</a></li>
+                <li class="tabs-title"><a href="#UpdateSupplier">Update supplier</a></li>
+            </ul>
+            <div class="tabs-content"  data-tabs-content="example-tabs">
+          
+                <div class="tabs-panel is-active paneel " id="SupplierInfo">
+
+                    <div id="SupplierInfo" class="row center">
+                        <div class="large-4 columns">
+                            <p><b>Name:</b> @supplier.Naam</p>
+                            <p><b>Email:</b> @supplier.Email</p>
+                            <p><b>Phonenumber:</b> @supplier.Telefoonnummer</p>                                            
+                        </div>
+                        <div class="large-8 columns">
+                            <div class="large-8 columns">
+                                <p><b>Street:</b> @supplier.Straat</p>
+                                <p><b>Zipcode:</b> @supplier.Postcode</p>
+                                <p><b>City:</b> @supplier.Plaats</p>  
+                                <p><b>Country:</b> @supplier.Land</p>  
+                            </div>
+                            <div class="large-4 columns">
+                                <p><b>House number:</b> @supplier.Huisnummer</p>  
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+
+                <div class="tabs-panel paneel center" id="UpdateSupplier">
+                    <form action="/Auth/Update" method="post">
+                        <div class="row center">
+                            <div class="large-4 columns">
+                              
+                                <input id="Name" name="Name" placeholder="Name" required="required" type="text" value="@supplier.Naam">
+                                <input id="Email" name="Email" placeholder="Email" required="required" type="text" value="@supplier.Email">
+                                <input id="Phonenumber" name="Phonenumber" placeholder="Phonenumber" required="required" type="text" value="@supplier.Telefoonnummer">
+                            </div>
+                            <div class="large-8 columns">
+                                <div class="large-8 columns">
+                                    <input id="Street" name="Street" placeholder="Street" required="required" type="text" value="@supplier.Straat">
+                                    <input id="Zipcode" name="Zipcode" placeholder="Zipcode" required="required" type="text" value="@supplier.Postcode">
+                                    <input id="City" name="City" placeholder="City" required="required" type="text" value="@supplier.Plaats">
+                                    <input id="Country" name="Country" placeholder="Country" required="required" type="text" value="@supplier.Land">
+                                </div>
+                                <div class="large-4 columns">
+                                    <input id="HouseNumber" name="HouseNumber" placeholder="HouseNumber" required="required" type="text" value="@supplier.Huisnummer" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="spacer">
+                            
+                        </div>
+                        <div id="updateButtons" class="row stickToBottom maxWidth">
+                            <div class="large-12 columns">
+                              
+                                    <input class="button expanded success" type="submit" value="Update Supplier" />
+                               
+                                    <input class="button expanded alert" type="submit" value="Delete Supplier" />
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+          
+            </div>
+
+        </div>
+    </div>
+}
+
+

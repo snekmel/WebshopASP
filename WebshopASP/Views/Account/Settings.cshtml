@@ -1,59 +1,74 @@
-﻿@{
+﻿@using DalWebshop.Models
+@{
     ViewBag.Title = "Settings";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Gebruiker AuthUser = (Gebruiker)Session["AuthGebruiker"];
 }
 
-<div class="row">
-
-    <h2 class="center">Account Settings</h2>
-    <ul class="tabs" data-tabs id="example-tabs">
-        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Account Information</a></li>
-        <li class="tabs-title"><a href="#panel2">Change Password</a></li>
-    </ul>
-
-    <div class="tabs-content" data-tabs-content="example-tabs">
-        <div class="tabs-panel is-active" id="panel1">
-            <div id="registerForm" class="row">
-                <div class="large-4 columns">
-                    @Html.TextBox("Email", "", new { @placeholder = "Email", required = "required" })
-                    @Html.TextBox("Name", "", new { @placeholder = "Name", required = "required" })
-                    @Html.TextBox("Lastname", "", new { @placeholder = "Lastname", required = "required" })
-                    @Html.TextBox("Password", "", new { @placeholder = "Password", required = "required" })
-                    @Html.TextBox("Password2", "", new { @placeholder = "Password", required = "required" })
-                </div>
-                <div class="large-8 columns">
-                    <div class="large-8 columns">
-                        @Html.TextBox("Street", "", new { @placeholder = "Street", required = "required" })
-                        @Html.TextBox("Zipcode", "", new { @placeholder = "Zipcode", required = "required" })
-                        @Html.TextBox("City", "", new { @placeholder = "City", required = "required" })
-                        @Html.TextBox("Country", "", new { @placeholder = "Country", required = "required" })
+@if (AuthUser != null)
+{
+    <div class="row">
+        <h2 class="center">Account Settings</h2>
+        <ul class="tabs" data-tabs id="example-tabs">
+            <li class="tabs-title is-active"><a href="#Accountinfo" aria-selected="true">Account Information</a></li>
+            <li class="tabs-title"><a href="#Changepassword">Change Password</a></li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="example-tabs">
+            <div class="tabs-panel is-active" id="Accountinfo">
+                <form action="/Auth/Update" method="post">
+                    <div id="registerForm" class="row">
+                        <div class="large-4 columns">
+                            <input id="Email" name="Email" placeholder="Email" required="required" type="text" value="@AuthUser.Email">
+                            <input id="Name" name="Name" placeholder="Name" required="required" type="text" value="@AuthUser.Voornaam">
+                            <input id="Lastname" name="Lastname" placeholder="Lastname" required="required" type="text" value="@AuthUser.Achternaam">
+                        </div>
+                        <div class="large-8 columns">
+                            <div class="large-8 columns">
+                                <input id="Street" name="Street" placeholder="Street" required="required" type="text" value="@AuthUser.Straat">
+                                <input id="Zipcode" name="Zipcode" placeholder="Zipcode" required="required" type="text" value="@AuthUser.Postcode">
+                                <input id="City" name="City" placeholder="City" required="required" type="text" value="@AuthUser.Woonplaats">
+                                <input id="Country" name="Country" placeholder="Country" required="required" type="text" value="@AuthUser.Land">
+                            </div>
+                            <div class="large-4 columns">
+                                <input id="HouseNumber" name="HouseNumber" placeholder="HouseNumber" required="required" type="text" value="@AuthUser.Huisnummer" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="large-4 columns">
-                        @Html.TextBox("HouseNumber", "", new { @placeholder = "HouseNumber", required = "required" })
+                    <div id="createAccountbtn" class="row">
+                        <div class="large-12 columns">
+                            <input class="button expanded success" type="submit" value="Update Account" />
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-            <div id="createAccountbtn" class="row">
-                <div class="large-12 columns">
-                    <input class="button expanded success" type="submit" value="Update Account" />
-                </div>
+            <div class="tabs-panel" id="Changepassword">
+
+                <form action="/Auth/Changepassword" method="post">
+                    <input type="password" placeholder="Old Password" name="oldPassword" />
+                    <input type="text" placeholder="New Password" name="newPassword" />
+                    <input type="text" placeholder="Validate new Password" name="validateNewPassword" />
+                    <input class="button expanded success" type="submit" value="Change password" />
+                </form>
             </div>
-
-
         </div>
-        <div class="tabs-panel" id="panel2">
-            
-            <form action="" method="post">
-                <input type="password" placeholder="Old Password" name="oldPassword" />
-                <input type="text" placeholder="New Password" name="newPassword" />
-                <input type="text" placeholder="Validate new Password" name="validateNewPassword" />
-                <input class="button expanded success" type="submit" value="Change password" />
-            </form>
+        @if (ViewBag.UpdateResult != null && ViewBag.UpdateResult == "true")
+        {
+            <br />  <div class="callout success">
+                <h5>@AuthUser.Voornaam,</h5>
+                <p>Your account has been updated.</p>
+            </div>
+        }
+        @if (ViewBag.UpdateResult != null && ViewBag.UpdateResult == "false")
+        {
+            <br />  <div class="callout alert">
+                <h5>Something went wrong,</h5>
+                <p>Please check your information since it does not seem to meet the requirements.</p>
+            </div>
+        }
         
-
-
-        </div>
     </div>
-    
-
-</div>
+}
+else
+{
+  <h1> please login first</h1>
+}

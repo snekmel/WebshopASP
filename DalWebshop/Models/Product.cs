@@ -11,7 +11,6 @@ namespace DalWebshop.Models
         public string Omschrijving { get; set; }
         public int Voorraad { get; set; }
         public decimal Prijs { get; set; }
-        public int KortingId { get; set; }
         public int LeverancierId { get; private set; }
         public int ProductCategorieId { get; set; }
 
@@ -46,9 +45,9 @@ namespace DalWebshop.Models
             return null;
         }
 
-        public Korting RetrieveKorting()
+        public List<Korting> RetrieveKorting()
         {
-            return null;
+            return Korting.GetKortingByProductId(this.Id.ToString());
         }
 
         public Productcategorie RetrieveCategorie()

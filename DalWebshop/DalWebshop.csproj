@@ -64,6 +64,7 @@
     <Compile Include="Repositorys\DAL\Context\RecensieSQLContext.cs" />
     <Compile Include="Repositorys\DAL\Env.cs" />
     <Compile Include="Repositorys\DAL\Interfaces\IAfbeelding.cs" />
+    <Compile Include="Repositorys\DAL\Interfaces\IKorting.cs" />
     <Compile Include="Repositorys\DAL\Interfaces\IMaintanable.cs" />
     <Compile Include="Repositorys\DAL\Interfaces\IOrder.cs" />
     <Compile Include="Repositorys\DAL\Interfaces\IProduct.cs" />

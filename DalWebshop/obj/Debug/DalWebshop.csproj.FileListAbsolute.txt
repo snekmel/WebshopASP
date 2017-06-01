@@ -3,3 +3,8 @@ C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\bin\D
 C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\obj\Debug\DalWebshop.csprojResolveAssemblyReference.cache
 C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\obj\Debug\DalWebshop.dll
 C:\Users\Lars Lemkens\Desktop\Google Drive\Projecten\WebshopASP\DalWebshop\obj\Debug\DalWebshop.pdb
+C:\Projects\WebshopASP\DalWebshop\bin\Debug\DalWebshop.dll
+C:\Projects\WebshopASP\DalWebshop\bin\Debug\DalWebshop.pdb
+C:\Projects\WebshopASP\DalWebshop\obj\Debug\DalWebshop.csprojResolveAssemblyReference.cache
+C:\Projects\WebshopASP\DalWebshop\obj\Debug\DalWebshop.dll
+C:\Projects\WebshopASP\DalWebshop\obj\Debug\DalWebshop.pdb

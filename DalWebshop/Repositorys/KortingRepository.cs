@@ -6,36 +6,48 @@ namespace DalWebshop.Repositorys
 {
     public class KortingRepository
     {
-        private IMaintanable<Korting> _crudInterface;
+        private IKorting _interface;
 
-        public KortingRepository(IMaintanable<Korting> i)
+        public KortingRepository(IKorting i)
         {
-            _crudInterface = i;
+            _interface = i;
         }
 
         public string Create(Korting obj)
         {
-            return _crudInterface.Create(obj);
+            return _interface.Create(obj);
         }
 
         public Korting Retrieve(string key)
         {
-            return _crudInterface.Retrieve(key);
+            return _interface.Retrieve(key);
         }
 
         public List<Korting> RetrieveAll()
         {
-            return _crudInterface.RetrieveAll();
+            return _interface.RetrieveAll();
         }
 
         public void Update(Korting obj)
         {
-            _crudInterface.Update(obj);
+            _interface.Update(obj);
         }
 
         public void Delete(string key)
         {
-            _crudInterface.Delete(key);
+            _interface.Delete(key);
         }
+
+        public List<Korting> RetrieveKortingByProductId(string id)
+        {
+           return  _interface.RetrieveKortingByProductId(id);
+        }
+
+        public void AddKortingToProduct(string productId, string kortingId)
+        {
+            _interface.AddKortingToProduct(productId, kortingId);
+        }
+
+
     }
 }

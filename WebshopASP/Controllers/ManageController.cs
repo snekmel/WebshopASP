@@ -32,14 +32,30 @@ namespace WebshopASP.Controllers
             return View("~/Views/Manage/Suppliers.cshtml");
         }
 
-
-
-
-
-
-        //Get: Manage/Discounts
-        public ActionResult Discounts()
+/*
+        //Get: Manage/Supplier/New
+        [HttpPost]
+        public ActionResult SupplierNew()
         {
+            ViewBag.Leveranciers = Leverancier.All();
+            return View("~/Views/Manage/Suppliers.cshtml");
+        }
+*/
+
+
+
+        //Get: Manage/Discounts/{Id}
+        public ActionResult Discounts(string id)
+        {
+
+            ViewBag.Discounts = Korting.All();
+            ViewBag.Products = Product.All();
+
+            if (id != null)
+            {
+                ViewBag.Discount = Korting.Find(id);
+            }
+
             return View("~/Views/Manage/Discounts.cshtml");
         }
 

@@ -5,7 +5,7 @@ namespace DalWebshop.Repositorys.DAL.Interfaces
 {
     public interface IOrder
     {
-        string Create(Order obj);
+        void Create(Order obj);
 
         Order Retrieve(string key);
 
@@ -14,5 +14,7 @@ namespace DalWebshop.Repositorys.DAL.Interfaces
         void Update(Order obj);
 
         void Delete(string key);
+
+        
     }
 }

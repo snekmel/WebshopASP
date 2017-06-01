@@ -1,6 +1,77 @@
-﻿@{
+﻿@using DalWebshop.Models
+@{
     ViewBag.Title = "Discounts";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Korting> discounts = ViewBag.Discounts;
+    Korting discount = ViewBag.Discount;
+    List<Product> products = ViewBag.Products;
+}
 }
 
-<h2>Discounts</h2>
+<div class="row text-center">
+    <br />
+    <h2>Discounts</h2>
+
+    <table id="discountsTable" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Discount %</th>
+            <th>Description</th>
+            <th>End Date</th>
+            <th>Open</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Discount %</th>
+            <th>Description</th>
+            <th>End Date</th>
+            <th>Open</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        @foreach (Korting d in discounts)
+        {
+            <tr>
+                <td>@d.Id</td>
+                <td>@d.Kortingspercentage</td>
+                <td>@d.Opmerking</td>
+                <td>@d.EindDatum</td>
+                <td><a href="@Url.Content("~/Manage/Discounts/")@d.Id" class="button"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+<div class="row">
+    <p><a class="button success" data-open="newDiscount"><i class="fa fa-plus" aria-hidden="true"></i> Add Discount</a></p>
+
+</div>
+<div class="reveal" id="newDiscount" data-reveal>
+    <form action="/Manage/DiscountNew" method="post">
+       
+        <input type="number" placeholder="Discount%" required/>
+        <input type="text" placeholder="Description" required/>
+        <input type="date" placeholder="Date" required/>
+        
+        <select multiple name="userIds">
+          @foreach (Product p in products)
+          {
+              <option value="@p.Id">@p.Titel -  @p.Prijs</option>
+          }
+
+        </select>
+        <div class="spacer">
+
+        </div>
+        <div id="updateButtons" class="row stickToBottom maxWidth">
+            <div class="large-12 columns">
+                <input class="button expanded success" type="submit" value="Create discount" />
+            </div>
+        </div>
+    </form>
+</div>

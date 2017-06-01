@@ -6,7 +6,7 @@ namespace DalWebshop.Models
 {
     public class Gebruiker
     {
-        public int Id { get; private set; }
+        public int Id { get;  set; }
         public string Email { get; set; }
         public string Wachtwoord { get; set; }
         public string Voornaam { get; set; }

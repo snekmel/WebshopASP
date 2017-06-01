@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace WebshopASP.Controllers
 {
@@ -76,11 +77,39 @@ namespace WebshopASP.Controllers
             return null;
         }
 
+
+        //Post : /Order/Post
+        [HttpPost]
+        public ActionResult Post(FormCollection form)
+        {
+            Order newOrder = (Order) Session["CartOrder"];
+            Gebruiker loggedUser = (Gebruiker) Session["AuthGebruiker"];
+
+            if (loggedUser == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+            else
+            {
+                newOrder.GebruikerId = loggedUser.Id;        
+                newOrder.SaveOrUpdate();
+                Session["CartOrder"] = null;
+                return this.Shoppingcart();
+            }
+
+
+
+           
+        }
+
+
         private void SetCartOrderIfNull()
         {
             if (Session["CartOrder"] == null)
             {
+
                 Session["CartOrder"] = new Order();
+               
             }
         }
     }

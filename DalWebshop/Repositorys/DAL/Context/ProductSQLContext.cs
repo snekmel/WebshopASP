@@ -15,7 +15,7 @@ namespace DalWebshop.Repositorys.DAL.Context
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "INSERT INTO Product (titel,omschrijving,voorraad,prijs,kortingId,leverancierId,productcategorieId) VALUES (@titel, @omschrijving, @voorraad, @prijs, @kortingId, @leverancierId, @productcategorieId);SELECT CAST(scope_identity() AS int);";
+                    string query = "INSERT INTO Product (titel,omschrijving,voorraad,prijs,leverancierId,productcategorieId) VALUES (@titel, @omschrijving, @voorraad, @prijs, @leverancierId, @productcategorieId);SELECT CAST(scope_identity() AS int);";
                     SqlCommand cmd = new SqlCommand(query, con);
 
                     con.Open();
@@ -23,7 +23,6 @@ namespace DalWebshop.Repositorys.DAL.Context
                     cmd.Parameters.AddWithValue("@omschrijving", obj.Omschrijving);
                     cmd.Parameters.AddWithValue("@voorraad", obj.Voorraad);
                     cmd.Parameters.AddWithValue("@prijs", obj.Prijs);
-                    cmd.Parameters.AddWithValue("@kortingId", obj.KortingId);
                     cmd.Parameters.AddWithValue("@leverancierId", obj.LeverancierId);
                     cmd.Parameters.AddWithValue("@productcategorieId", obj.ProductCategorieId);
 
@@ -60,10 +59,7 @@ namespace DalWebshop.Repositorys.DAL.Context
                     {
                         returnProduct = new Product(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetDecimal(4), reader.GetInt32(6), reader.GetInt32(7));
 
-                        if (!reader.IsDBNull(5))
-                        {
-                            returnProduct.KortingId = reader.GetInt32(5);
-                        }
+                     
                     }
                     con.Close();
                 }
@@ -95,12 +91,7 @@ namespace DalWebshop.Repositorys.DAL.Context
                     {
                         Product p = new Product(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetDecimal(4), reader.GetInt32(6), reader.GetInt32(7));
 
-                        if (!reader.IsDBNull(5))
-                        {
-                            p.KortingId = reader.GetInt32(5);
-                        }
-
-                        returnList.Add(p);
+                                            returnList.Add(p);
                     }
                     con.Close();
                 }
@@ -120,7 +111,7 @@ namespace DalWebshop.Repositorys.DAL.Context
             {
                 using (SqlConnection con = new SqlConnection(Env.ConString))
                 {
-                    string query = "UPDATE Product SET titel = @titel, omschrijving = @omschrijving, voorraad = @voorraad, prijs = @prijs, kortingId = @kortingId, leverancierId = @leverancierId, productcategorieId = @productcategorieId WHERE id = @key";
+                    string query = "UPDATE Product SET titel = @titel, omschrijving = @omschrijving, voorraad = @voorraad, prijs = @prijs, leverancierId = @leverancierId, productcategorieId = @productcategorieId WHERE id = @key";
 
                     SqlCommand cmd = new SqlCommand(query, con);
 
@@ -130,8 +121,7 @@ namespace DalWebshop.Repositorys.DAL.Context
                     cmd.Parameters.AddWithValue("@omschrijving", obj.Omschrijving);
                     cmd.Parameters.AddWithValue("@voorraad", obj.Voorraad);
                     cmd.Parameters.AddWithValue("@prijs", obj.Prijs);
-                    cmd.Parameters.AddWithValue("@kortingId", obj.KortingId);
-                    cmd.Parameters.AddWithValue("@leverancierId", obj.LeverancierId);
+                   cmd.Parameters.AddWithValue("@leverancierId", obj.LeverancierId);
                     cmd.Parameters.AddWithValue("@productcategorieId", obj.ProductCategorieId);
                     cmd.Parameters.AddWithValue("@key", obj.Id);
 

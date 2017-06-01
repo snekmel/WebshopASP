@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace DalWebshop.Repositorys.DAL.Context
 {
-    public class KortingSQLContext : IMaintanable<Korting>
+    public class KortingSQLContext : IKorting
     {
         public string Create(Korting obj)
         {
@@ -135,6 +135,59 @@ namespace DalWebshop.Repositorys.DAL.Context
                     SqlCommand cmd = new SqlCommand(query, con);
 
                     cmd.Parameters.AddWithValue("@key", key);
+                    con.Open();
+                    cmd.ExecuteReader();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public List<Korting> RetrieveKortingByProductId(string id)
+        {
+            List<Korting> returnList = new List<Korting>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Env.ConString))
+                {
+                    string query = "SELECT k.* FROM Product_Korting INNER JOIN Korting k on k.id = kortingId where productId = @id";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    con.Open();
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Korting k = new Korting(reader.GetInt32(0), Convert.ToDouble(reader.GetDecimal(1)), reader.GetString(2), reader.GetDateTime(3));
+                        returnList.Add(k);
+                    }
+                    con.Close();
+                }
+
+                return returnList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void AddKortingToProduct(string productId, string kortingId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Env.ConString))
+                {
+                    string query = "INSERT INTO Product_Korting (productId,kortingId) VALUES (@productId, @kortingId)";
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@productId", productId);
+                    cmd.Parameters.AddWithValue("@kortingId", kortingId);
                     con.Open();
                     cmd.ExecuteReader();
                     con.Close();

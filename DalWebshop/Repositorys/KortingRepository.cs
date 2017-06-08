@@ -40,7 +40,7 @@ namespace DalWebshop.Repositorys
 
         public List<Korting> RetrieveKortingByProductId(string id)
         {
-           return  _interface.RetrieveKortingByProductId(id);
+            return _interface.RetrieveKortingByProductId(id);
         }
 
         public void AddKortingToProduct(string productId, string kortingId)
@@ -48,6 +48,9 @@ namespace DalWebshop.Repositorys
             _interface.AddKortingToProduct(productId, kortingId);
         }
 
-
+        public void RemoveKortingFromProducts(string kortingId)
+        {
+            _interface.RemoveKortingFromProducts(kortingId);
+        }
     }
 }

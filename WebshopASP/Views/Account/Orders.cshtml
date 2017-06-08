@@ -1,6 +1,150 @@
-﻿@{
+﻿@using DalWebshop.Models
+@{
     ViewBag.Title = "Orders";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Order> Orders = ViewBag.MyOrders;
+    Order order = ViewBag.Order;
+    Gebruiker orderUser;
+    if (order !=null)
+    {
+        orderUser = order.GetGebruiker();
+    }
+    else
+    {
+        orderUser = null;
+    }
+
 }
 
-<h2>Orders</h2>
+<div class="row text-center">
+ <br />
+    <h2>My Orders</h2>
+
+    <table id="ordersTable" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Open</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Open</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        @foreach (Order o in Orders)
+        {
+            <tr>
+                <td>@o.Id</td>
+                <td>@o.Date</td>
+                <td>@o.TotaalPrijs()</td>
+                <td><a href="@Url.Content("~/Account/Orders/")@o.Id" class="button"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br/>
+</div>
+
+@if (order != null)
+{
+    <div class="large reveal" style="height: 75%" id="updateForm" data-reveal data-options="close_on_background_click:false;close_on_esc:false;">
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div class="row">
+
+            <ul class="tabs" data-tabs id="example-tabs">
+                <li class="tabs-title is-active"><a href="#orderInfo" aria-selected="true">Order Information</a></li>
+            </ul>
+            <div class="tabs-content" data-tabs-content="example-tabs">
+                <div class="tabs-panel is-active paneel " id="orderInfo">
+                    <div id="orderInfo" class="row">
+                    
+                  
+                                        
+                        <div class="large-6 columns">
+                            <p><b>Order Id: </b> 34</p>
+                            <p><b>Totaal bedrag: </b> @order.TotaalPrijs()</p>
+                            <p><b>Status: </b> @order.Status</p>
+                            <p><b>Email: </b> @orderUser.Email</p>           
+                        </div>
+                    
+                        <div class="large-6 columns">
+                            @if (orderUser != null)
+                            {
+                                <p>@orderUser.Voornaam @orderUser.Achternaam </p>
+                                <p>@orderUser.Straat @orderUser.Huisnummer</p>
+                                <p>@orderUser.Postcode @orderUser.Woonplaats</p>
+                                <p>@orderUser.Land</p>  
+                            } 
+                            <br />
+                            <br />
+                           
+                        </div>
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="large-12 columns maxWidth">
+                                <table style="margin-left: 20px">
+                                    <thead>
+                                    <tr>
+                                        <th width="40%%">Image</th>
+                                        <th width="50%">Product</th>
+                                        <th width="15%">Price</th>
+                                        <th width="10%">Amount</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if (order.Producten.Count == 0)
+                                    {
+                                        <tr>
+                                            <td colspan="5">The order appears to be empty!</td>
+                                        </tr>
+                                    }
+                                    @foreach (OrderRow p in order.Producten)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                @if (p.MainImage() != null)
+                                                {
+                                                    Afbeelding a = p.MainImage();
+                                                    <img class="thumbnail" src="@a.Path/@a.Naam" style="height: 100px; width: 133px">
+                                                }
+                                                else
+                                                {
+                                                    <img class="thumbnail" src="http://placehold.it/300x400">
+                                                }
+
+                                            </td>
+                                            <td>@p.ProductInformatie().Titel</td>
+                                            <td>@p.ProductInformatie().Prijs</td>
+                                            <td>
+                                                <input type="text" id="@p.ProductId" class="aantalTb" value="@p.Aantal" disabled="disabled"/>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>    
+                        
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

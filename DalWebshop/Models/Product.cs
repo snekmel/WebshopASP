@@ -37,11 +37,24 @@ namespace DalWebshop.Models
 
         public Leverancier RetrieveLeverancier()
         {
-            return null;
+            return Leverancier.Find(this.LeverancierId.ToString());
         }
 
         public List<Afbeelding> RetrieveAfbeeldingen()
         {
+            return Afbeelding.RetrieveAfbeeldingenByProductId(this.Id);
+        }
+
+        
+
+
+        public Afbeelding MainImage()
+        {
+            if (this.RetrieveAfbeeldingen().Count != 0)
+            {
+                List<Afbeelding> lijst = this.RetrieveAfbeeldingen();
+                return lijst[0];
+            }
             return null;
         }
 
@@ -57,11 +70,11 @@ namespace DalWebshop.Models
 
         public List<Recensie> RetrieveRecensies()
         {
-            return null;
+            return Recensie.FindByProductId(this.Id);
         }
 
         //-----------------------------------------------------------Fat Model----------------------------------------------------
-        public void SaveOrUpdate()
+        public string SaveOrUpdate()
         {
             ProductSQLContext psc = new ProductSQLContext();
             ProductRepository pr = new ProductRepository(psc);
@@ -69,10 +82,11 @@ namespace DalWebshop.Models
             if (Id != 0)
             {
                 pr.Update(this);
+                return this.Id.ToString();
             }
             else
             {
-                pr.Create(this);
+                return pr.Create(this);
             }
         }
 
@@ -90,6 +104,13 @@ namespace DalWebshop.Models
             ProductRepository pr = new ProductRepository(psc);
 
             return pr.Retrieve(key);
+        }
+
+        public static List<Product> GetNewestProducts(int aantal)
+        {
+            ProductSQLContext psc = new ProductSQLContext();
+            ProductRepository pr = new ProductRepository(psc);
+            return pr.RetrieveNewestProducts(aantal);
         }
     }
 }

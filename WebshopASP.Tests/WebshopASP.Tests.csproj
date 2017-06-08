@@ -90,6 +90,8 @@
     <Compile Include="KortingcouponTests.cs" />
     <Compile Include="RecensieTests.cs" />
     <Compile Include="ProductTests.cs" />
+    <Compile Include="AfbeeldingTests.cs" />
+    <Compile Include="OrderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

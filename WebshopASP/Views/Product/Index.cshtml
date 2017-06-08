@@ -5,6 +5,20 @@
     var categories = @ViewBag.Categories;
     var products = @ViewBag.products;
 }
+<br />
+<br />
+<div class="row">
+    
+    <div class="large-10 columns"><input type="text" name="search" placeholder="Find.." id="searchValue"/>
+    </div>
+    <div class="large-2 columns"><a class="button success" style="width: 150px" id="searchProductBtn">Search</a>
+    </div>
+
+
+
+</div>
+<br/>
+<br/>
 <div class="row">
     <div class="large-2 columns">
 
@@ -23,9 +37,19 @@
 
         @foreach (Product p in products)
         {
-            <div class="small-2 large-4 columns">
+            <div class="small-2 large-4 columns" style="float: left">
                 <div class="column">
-                    <img class="thumbnail" src="http://placehold.it/300x400">
+
+                   @if (p.MainImage() != null)
+                   {
+                       Afbeelding a = p.MainImage();
+                       <img class="thumbnail" src="@a.Path/@a.Naam" style="height: 300px; width: 400px">
+                   }
+                   else
+                   {
+                       <img class="thumbnail" src="http://placehold.it/300x400">
+                   }
+
                     <h5>@p.Titel</h5>
                     <p>@p.Prijs</p>
                     <a href="/Product/@p.Id" class="button expanded success">Info</a>
@@ -33,6 +57,5 @@
                 </div>
             </div>
         }
-
     </div>
 </div>

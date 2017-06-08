@@ -1,9 +1,6 @@
-﻿using System;
+﻿using DalWebshop.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DalWebshop.Models;
+
 namespace DalWebshop.Repositorys.DAL.Interfaces
 {
     public interface IKorting
@@ -22,5 +19,6 @@ namespace DalWebshop.Repositorys.DAL.Interfaces
 
         void AddKortingToProduct(string productId, string kortingId);
 
+        void RemoveKortingFromProducts(string kortingId);
     }
 }

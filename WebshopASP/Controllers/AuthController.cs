@@ -1,7 +1,6 @@
 ﻿using DalWebshop.Models;
 using DalWebshop.Repositorys;
 using System.Web.Mvc;
-using DalWebshop.Repositorys.DAL.Context;
 
 namespace WebshopASP.Controllers
 {
@@ -50,7 +49,6 @@ namespace WebshopASP.Controllers
         {
             Gebruiker g = (Gebruiker)Session["AuthGebruiker"];
 
-
             if (g.Wachtwoord == form["oldPassword"] && (form["newPassword"] == form["validateNewPassword"]))
             {
                 g.Wachtwoord = form["newPassword"];
@@ -66,14 +64,11 @@ namespace WebshopASP.Controllers
             return View("~/Views/Account/Settings.cshtml");
         }
 
-
-
-
         //Post: /Auth/Update
         [HttpPost]
         public ActionResult Update(FormCollection form)
         {
-            Gebruiker g =(Gebruiker) Session["AuthGebruiker"];
+            Gebruiker g = (Gebruiker)Session["AuthGebruiker"];
 
             g.Email = form["Email"];
             g.Voornaam = form["Name"];
@@ -84,16 +79,14 @@ namespace WebshopASP.Controllers
             g.Woonplaats = form["Country"];
             g.Land = form["City"];
 
-         string id =   g.SaveOrUpdate();
+            string id = g.SaveOrUpdate();
 
             if (id != null)
             {
                 ViewBag.UpdateResult = "true";
             }
 
-              return View("~/Views/Account/Settings.cshtml");
-
-
+            return View("~/Views/Account/Settings.cshtml");
         }
 
         // POST: Login

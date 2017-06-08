@@ -6,7 +6,7 @@ namespace DalWebshop.Models
 {
     public class Gebruiker
     {
-        public int Id { get;  set; }
+        public int Id { get; set; }
         public string Email { get; set; }
         public string Wachtwoord { get; set; }
         public string Voornaam { get; set; }
@@ -52,7 +52,7 @@ namespace DalWebshop.Models
             GebruikerSQLContext gsc = new GebruikerSQLContext();
             GebruikerRepository gr = new GebruikerRepository(gsc);
 
-            if ( Id !=0)
+            if (Id != 0)
             {
                 gr.Update(this);
                 return this.Id.ToString();

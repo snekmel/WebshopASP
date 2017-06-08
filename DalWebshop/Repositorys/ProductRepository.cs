@@ -1,6 +1,7 @@
 ﻿using DalWebshop.Models;
 using DalWebshop.Repositorys.DAL.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DalWebshop.Repositorys
 {
@@ -37,5 +38,24 @@ namespace DalWebshop.Repositorys
         {
             _interface.Delete(key);
         }
+
+        public List<Product> RetrieveNewestProducts(int aantal)
+        {
+            List<Product> all = this.RetrieveAll();
+            List<Product> returnList = all.OrderByDescending(p => p.Id).Take(aantal).ToList();
+            return returnList;
+
+        }
+
+        public List<Product> RetrieveRelativeProducts(Productcategorie categorie, int aantal)
+        {
+            List<Product> all = this.RetrieveAll();
+            List<Product> returnList = all.OrderByDescending(p => p.Id).Take(aantal).ToList();
+            return returnList;
+
+        }
+
+
+
     }
 }

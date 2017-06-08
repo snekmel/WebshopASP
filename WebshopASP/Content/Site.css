@@ -1,5 +1,4 @@
-﻿
-body {
+﻿body {
     height: 100%;
 }
 
@@ -36,7 +35,6 @@ body {
 
 .stickToBottom {
     bottom: 0;
-  
 }
 
 #btnBuynow {
@@ -52,4 +50,12 @@ body {
 
 #updateButtons {
     vertical-align: bottom;
+}
+
+.mySlides {
+    height: 525px;
+}
+
+#searchBar {
+    padding-left: 20%
 }

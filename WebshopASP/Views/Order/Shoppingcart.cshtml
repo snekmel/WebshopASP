@@ -37,7 +37,18 @@
                 @foreach (OrderRow p in CartOrder.Producten)
                 {
                     <tr>
-                        <td>Image</td>
+                        <td>
+                            @if (p.MainImage() != null)
+                            {
+                                Afbeelding a = p.MainImage();
+                                <img class="thumbnail" src="@a.Path/@a.Naam" style="height: 100px; width: 133px">
+                            }
+                            else
+                            {
+                                <img class="thumbnail" src="http://placehold.it/300x400">
+                            }
+
+                        </td>
                         <td>@p.ProductInformatie().Titel</td>
                         <td>@p.ProductInformatie().Prijs</td>
                         <td>

@@ -1,4 +1,6 @@
-﻿namespace DalWebshop.Models
+﻿using System.Collections.Generic;
+
+namespace DalWebshop.Models
 {
     public class OrderRow
     {
@@ -24,6 +26,13 @@
         {
             this.ProductId = productId;
             this.Aantal = aantal;
+        }
+
+        public Afbeelding MainImage()
+        {
+            Product p = this.ProductInformatie();
+
+            return p.MainImage();
         }
     }
 }

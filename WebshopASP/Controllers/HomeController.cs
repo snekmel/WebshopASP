@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using DalWebshop.Models;
 
 namespace WebshopASP.Controllers
 {
@@ -6,21 +7,11 @@ namespace WebshopASP.Controllers
     {
         public ActionResult Index()
         {
+
+            ViewBag.Products = Product.GetNewestProducts(4);
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+    
     }
 }

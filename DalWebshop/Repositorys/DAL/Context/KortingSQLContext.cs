@@ -108,9 +108,9 @@ namespace DalWebshop.Repositorys.DAL.Context
                     string query = " UPDATE Korting SET kortingspercentage = @kortingspercentage, opmerking = @opmerking, eindDatum = @eindDatum WHERE id = @key";
                     SqlCommand cmd = new SqlCommand(query, con);
 
-                    cmd.Parameters.AddWithValue("@kortingspercentage", obj.Kortingspercentage);
+                    cmd.Parameters.AddWithValue("@kortingspercentage", Convert.ToString(obj.Kortingspercentage));
                     cmd.Parameters.AddWithValue("@opmerking", obj.Opmerking);
-                    cmd.Parameters.AddWithValue("@eindDatum", obj.EindDatum);
+                    cmd.Parameters.AddWithValue("@eindDatum", obj.EindDatum.ToString());
                     cmd.Parameters.AddWithValue("@key", obj.Id);
 
                     con.Open();
@@ -188,6 +188,28 @@ namespace DalWebshop.Repositorys.DAL.Context
 
                     cmd.Parameters.AddWithValue("@productId", productId);
                     cmd.Parameters.AddWithValue("@kortingId", kortingId);
+                    con.Open();
+                    cmd.ExecuteReader();
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void RemoveKortingFromProducts(string kortingId)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Env.ConString))
+                {
+                    string query = "DELETE FROM Product_Korting WHERE kortingId = @key";
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    cmd.Parameters.AddWithValue("@key", kortingId);
                     con.Open();
                     cmd.ExecuteReader();
                     con.Close();

@@ -22,7 +22,8 @@
             <ul class="dropdown menu" data-dropdown-menu>
                 <li class="menu-text">Webshop</li>
                 <li><a href="/">Home</a></li>
-                <li><a href="/Products">Products</a></li>
+                <li><a href="/Products">Products</a></li>                     
+
                 @if (AuthUser != null)
                 {
 
@@ -56,7 +57,7 @@
                 <li><a href="/Shoppingcart">Shoppingcart</a></li>
                 @if (AuthUser == null)
             {
-                 
+
                     <li><a href="/Login">Login</a></li>
                     <li><a href="/Register">Create Account</a></li>
                 }
@@ -72,23 +73,21 @@
     <div class="callout large secondary">
         <div class="row">
             <div class="large-4 columns">
-                <h5>Vivamus Hendrerit Arcu Sed Erat Molestie</h5>
-                <p>Curabitur vulputate, ligula lacinia scelerisque tempor, lacus lacus ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed molestie augue sit.</p>
+                <h5>Webshop</h5>
+                <p>We guarantee quality over anything. If you have any questions please send us an email at: webshop@webshop.com.
+                
+                    <br/><br />
+                Happy Shopping!
+</p>
             </div>
-            <div class="large-3 large-offset-2 columns">
+
+           
+            <div class="large-6 columns ">
                 <ul class="menu vertical">
-                    <li><a href="#">One</a></li>
-                    <li><a href="#">Two</a></li>
-                    <li><a href="#">Three</a></li>
-                    <li><a href="#">Four</a></li>
-                </ul>
-            </div>
-            <div class="large-3 columns">
-                <ul class="menu vertical">
-                    <li><a href="#">One</a></li>
-                    <li><a href="#">Two</a></li>
-                    <li><a href="#">Three</a></li>
-                    <li><a href="#">Four</a></li>
+                    <li><a href="/Products">Products</a></li>
+                    <li><a href="/Shoppingcart">Shoppingcart</a></li>
+                    <li><a href="/Login">Login</a></li>
+                    <li><a href="/Register">Register</a></li>
                 </ul>
             </div>
         </div>

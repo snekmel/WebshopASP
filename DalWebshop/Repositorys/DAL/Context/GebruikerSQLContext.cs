@@ -128,7 +128,7 @@ namespace DalWebshop.Repositorys.DAL.Context
                     cmd.Parameters.AddWithValue("@woonplaats", obj.Woonplaats);
                     cmd.Parameters.AddWithValue("@id", obj.Id);
 
-                    con.Open();          
+                    con.Open();
                     cmd.ExecuteReader();
                     con.Close();
                 }

@@ -6,7 +6,6 @@ namespace DalWebshop.Repositorys
 {
     public class OrderRepository
     {
-
         private IOrder _interface;
 
         public OrderRepository(IOrder i)
@@ -17,7 +16,6 @@ namespace DalWebshop.Repositorys
         public void Create(Order obj)
         {
             _interface.Create(obj);
-      
         }
 
         public void Delete(string key)
@@ -35,9 +33,15 @@ namespace DalWebshop.Repositorys
             return _interface.RetrieveAll();
         }
 
+        public void Update(Order obj)
+        {
+             _interface.Update(obj);
+        }
+
+
+
         public List<Order> RetrieveByGebruikerId(int gebruikerId)
         {
-
             List<Order> returnList = new List<Order>();
             foreach (Order o in this.RetrieveAll())
             {
@@ -46,9 +50,7 @@ namespace DalWebshop.Repositorys
                     returnList.Add(o);
                 }
             }
-
             return returnList;
         }
-
     }
 }

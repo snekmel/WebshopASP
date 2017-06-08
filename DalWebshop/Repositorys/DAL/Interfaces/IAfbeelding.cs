@@ -5,16 +5,10 @@ namespace DalWebshop.Repositorys.DAL.Interfaces
 {
     public interface IAfbeelding
     {
-        string Create(Afbeelding obj);
-
-        Afbeelding Retrieve(string key);
-
-        List<Afbeelding> RetrieveAll();
-
-        void Update(Afbeelding obj);
+        string Create(Afbeelding obj, int productId);
 
         void Delete(string key);
 
-        List<Afbeelding> GetAfbeeldingByOrderId();
+        List<Afbeelding> RetrieveAfbeeldingenByProductId(int id);
     }
 }

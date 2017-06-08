@@ -58,8 +58,6 @@ namespace DalWebshop.Repositorys.DAL.Context
                     while (reader.Read())
                     {
                         returnProduct = new Product(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetDecimal(4), reader.GetInt32(6), reader.GetInt32(7));
-
-                     
                     }
                     con.Close();
                 }
@@ -91,7 +89,7 @@ namespace DalWebshop.Repositorys.DAL.Context
                     {
                         Product p = new Product(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetDecimal(4), reader.GetInt32(6), reader.GetInt32(7));
 
-                                            returnList.Add(p);
+                        returnList.Add(p);
                     }
                     con.Close();
                 }
@@ -121,7 +119,7 @@ namespace DalWebshop.Repositorys.DAL.Context
                     cmd.Parameters.AddWithValue("@omschrijving", obj.Omschrijving);
                     cmd.Parameters.AddWithValue("@voorraad", obj.Voorraad);
                     cmd.Parameters.AddWithValue("@prijs", obj.Prijs);
-                   cmd.Parameters.AddWithValue("@leverancierId", obj.LeverancierId);
+                    cmd.Parameters.AddWithValue("@leverancierId", obj.LeverancierId);
                     cmd.Parameters.AddWithValue("@productcategorieId", obj.ProductCategorieId);
                     cmd.Parameters.AddWithValue("@key", obj.Id);
 
@@ -160,7 +158,31 @@ namespace DalWebshop.Repositorys.DAL.Context
 
         public List<Product> RetrieveByOrderId(int id)
         {
-            throw new NotImplementedException();
+            List<Product> returnList = new List<Product>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Env.ConString))
+                {
+                    string query = "SELECT Product.* FROM Order_Product INNER JOIN Product on id = Order_Product.productId WHERE Order_Product.orderId = @key";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@key", id);
+                    con.Open();
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Product p = new Product(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetDecimal(4), reader.GetInt32(6), reader.GetInt32(7));
+
+                        returnList.Add(p);
+                    }
+                    con.Close();
+                }
+                return returnList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

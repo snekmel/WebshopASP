@@ -1,7 +1,6 @@
-﻿using System;
-using DalWebshop.Repositorys;
-using DalWebshop.Models;
+﻿using DalWebshop.Repositorys;
 using DalWebshop.Repositorys.DAL.Context;
+using System;
 using System.Collections.Generic;
 
 namespace DalWebshop.Models
@@ -28,8 +27,7 @@ namespace DalWebshop.Models
             EindDatum = eindDatum;
         }
 
-
-        public void SaveOrUpdate()
+        public string SaveOrUpdate()
         {
             KortingSQLContext ksc = new KortingSQLContext();
             KortingRepository kr = new KortingRepository(ksc);
@@ -37,11 +35,20 @@ namespace DalWebshop.Models
             if (Id != 0)
             {
                 kr.Update(this);
+                return Id.ToString();
             }
             else
             {
-                kr.Create(this);
+                return kr.Create(this);
             }
+        }
+
+        public void Delete()
+        {
+            KortingSQLContext ksc = new KortingSQLContext();
+            KortingRepository kr = new KortingRepository(ksc);
+
+            kr.Delete(Id.ToString());
         }
 
         public static List<Korting> All()
@@ -65,11 +72,8 @@ namespace DalWebshop.Models
             KortingSQLContext ksc = new KortingSQLContext();
             KortingRepository kr = new KortingRepository(ksc);
 
-
             return kr.RetrieveKortingByProductId(productId);
-
-
-               }
+        }
 
         public static void AddKortingToProduct(string kortingId, string productid)
         {
@@ -79,5 +83,20 @@ namespace DalWebshop.Models
             kr.AddKortingToProduct(productid, kortingId);
         }
 
+        public static void RemoveKortingFromProducts(string kortingId)
+        {
+            KortingSQLContext ksc = new KortingSQLContext();
+            KortingRepository kr = new KortingRepository(ksc);
+
+            kr.RemoveKortingFromProducts(kortingId);
+        }
+
+        public static List<Korting> RetrieveByProductId(string id)
+        {
+            KortingSQLContext ksc = new KortingSQLContext();
+            KortingRepository kr = new KortingRepository(ksc);
+
+            return kr.RetrieveKortingByProductId(id);
+        }
     }
 }

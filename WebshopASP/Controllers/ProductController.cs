@@ -1,7 +1,10 @@
 ﻿using DalWebshop.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Linq.SqlClient;
+using System.Linq;
 using System.Web.Mvc;
+
 
 namespace WebshopASP.Controllers
 {
@@ -23,13 +26,31 @@ namespace WebshopASP.Controllers
         {
             if (id != null)
             {
-                ViewBag.Product = DalWebshop.Models.Product.Find(id);
+                Product p = DalWebshop.Models.Product.Find(id);
+                ViewBag.Product = p;
+                ViewBag.Kortingen = p.RetrieveKorting();
             }
 
             ViewBag.Recensies = DalWebshop.Models.Recensie.FindByProductId(Convert.ToInt32(id));
 
             return View("~/Views/Product/Product.cshtml");
         }
+
+        //Get: Product/search/{String}
+        public ActionResult Search(string id)
+        {
+
+            List<Product> allProducts = DalWebshop.Models.Product.All();
+            ViewBag.Products = allProducts.Where(p => p.Titel.ToLower().Contains(id.ToLower()));
+            ViewBag.Categories = DalWebshop.Models.Productcategorie.All();
+            return View("~/Views/Product/Index.cshtml");
+
+
+
+
+        }
+
+
 
         // GET: Productcategory/{id}
         public ActionResult ProductCategorie(string id)

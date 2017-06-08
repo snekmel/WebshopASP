@@ -36,18 +36,17 @@
                 <td>@l.Id</td>
                 <td>@l.Naam</td>
                 <td>@l.Telefoonnummer</td>
-                <td>@l.Email</td>     
+                <td>@l.Email</td>
                 <td><a href="@Url.Content("~/Manage/Supplier/")@l.Id" class="button"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
             </tr>
         }
         </tbody>
     </table>
-    <br/>
+    <br />
 </div>
 
 <div class="row">
     <p><a class="button success" data-open="newSupplier"><i class="fa fa-plus" aria-hidden="true"></i> Add Supplier</a></p>
-    
 </div>
 <div class="reveal" id="newSupplier" data-reveal>
     <form action="/Manage/SupplierNew" method="post">
@@ -72,7 +71,6 @@
         </div>
 
         <div class="spacer">
-
         </div>
         <div id="updateButtons" class="row stickToBottom maxWidth">
             <div class="large-12 columns">
@@ -117,8 +115,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="tabs-panel paneel center" id="UpdateSupplier">
@@ -144,7 +140,6 @@
                         </div>
 
                         <div class="spacer">
-
                         </div>
                         <div id="updateButtons" class="row stickToBottom maxWidth">
                             <div class="large-12 columns">
@@ -152,14 +147,11 @@
                                 <input class="button expanded success" type="submit" value="Update Supplier" />
 
                                 <input class="button expanded alert" type="submit" value="Delete Supplier" />
-
                             </div>
                         </div>
                     </form>
                 </div>
-
             </div>
-
         </div>
     </div>
 }

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using DalWebshop.Repositorys;
+﻿using DalWebshop.Repositorys;
 using DalWebshop.Repositorys.DAL.Context;
+using System;
+using System.Collections.Generic;
 
 namespace DalWebshop.Models
 {
@@ -12,6 +12,8 @@ namespace DalWebshop.Models
         public int GebruikerId { get; set; }
         public Kortingcoupon Kortingcoupon { get; set; }
         public List<OrderRow> Producten { get; set; }
+        public Decimal BetaalBedrag { get; set; }
+        public string Status { get; set; }
 
         public Order(int id, DateTime date, int gebruikerId)
         {
@@ -50,16 +52,20 @@ namespace DalWebshop.Models
             return returnAmount;
         }
 
+        public Gebruiker GetGebruiker()
+        {
+            return  Gebruiker.Find(this.GebruikerId.ToString());
+        }
 
 
         public void SaveOrUpdate()
         {
-             OrderSQLContext osc = new OrderSQLContext();
+            OrderSQLContext osc = new OrderSQLContext();
             OrderRepository or = new OrderRepository(osc);
 
             if (Id != 0)
             {
-             //   or.Update(this);
+                  or.Update(this);
             }
             else
             {

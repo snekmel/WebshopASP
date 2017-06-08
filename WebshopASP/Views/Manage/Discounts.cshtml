@@ -6,7 +6,6 @@
     Korting discount = ViewBag.Discount;
     List<Product> products = ViewBag.Products;
 }
-}
 
 <div class="row text-center">
     <br />
@@ -14,34 +13,34 @@
 
     <table id="discountsTable" class="display" cellspacing="0" width="100%">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Discount %</th>
-            <th>Description</th>
-            <th>End Date</th>
-            <th>Open</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Discount %</th>
+                <th>Description</th>
+                <th>End Date</th>
+                <th>Open</th>
+            </tr>
         </thead>
         <tfoot>
-        <tr>
-            <th>Id</th>
-            <th>Discount %</th>
-            <th>Description</th>
-            <th>End Date</th>
-            <th>Open</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Discount %</th>
+                <th>Description</th>
+                <th>End Date</th>
+                <th>Open</th>
+            </tr>
         </tfoot>
         <tbody>
-        @foreach (Korting d in discounts)
-        {
-            <tr>
-                <td>@d.Id</td>
-                <td>@d.Kortingspercentage</td>
-                <td>@d.Opmerking</td>
-                <td>@d.EindDatum</td>
-                <td><a href="@Url.Content("~/Manage/Discounts/")@d.Id" class="button"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
-            </tr>
-        }
+            @foreach (Korting d in discounts)
+            {
+                <tr>
+                    <td>@d.Id</td>
+                    <td>@d.Kortingspercentage</td>
+                    <td>@d.Opmerking</td>
+                    <td>@d.EindDatum</td>
+                    <td><a href="@Url.Content("~/Manage/Discounts/")@d.Id" class="button"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                </tr>
+            }
         </tbody>
     </table>
     <br />
@@ -49,24 +48,21 @@
 
 <div class="row">
     <p><a class="button success" data-open="newDiscount"><i class="fa fa-plus" aria-hidden="true"></i> Add Discount</a></p>
-
 </div>
 <div class="reveal" id="newDiscount" data-reveal>
     <form action="/Manage/DiscountNew" method="post">
-       
-        <input type="number" placeholder="Discount%" required/>
-        <input type="text" placeholder="Description" required/>
-        <input type="date" placeholder="Date" required/>
-        
-        <select multiple name="userIds">
-          @foreach (Product p in products)
-          {
-              <option value="@p.Id">@p.Titel -  @p.Prijs</option>
-          }
 
+        <label>Discount Percentage</label><input type="number" name="Percentage" placeholder="Discount%" required />
+        <Label>Description</Label><input type="text" name="Description" placeholder="Description" required />
+        <Label>End date</Label><input type="date" name="endDate" placeholder="Date" required />
+
+        <select multiple name="productIds">
+            @foreach (Product p in products)
+            {
+                <option value="@p.Id">@p.Titel -  @p.Prijs</option>
+            }
         </select>
         <div class="spacer">
-
         </div>
         <div id="updateButtons" class="row stickToBottom maxWidth">
             <div class="large-12 columns">
@@ -75,3 +71,73 @@
         </div>
     </form>
 </div>
+
+@if (discount != null)
+{
+    <div class="large reveal" style="height: 75%" id="updateForm" data-reveal data-options="close_on_background_click:false;close_on_esc:false;">
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div class="row">
+
+            <ul class="tabs" data-tabs id="example-tabs">
+                <li class="tabs-title is-active"><a href="#discountInfo" aria-selected="true">Discount Information</a></li>
+                <li class="tabs-title"><a href="#Updatediscount">Update Discount</a></li>
+            </ul>
+            <div class="tabs-content" data-tabs-content="example-tabs">
+
+                <div class="tabs-panel is-active paneel " id="discountInfo">
+
+                    <div id="discountInfo" class="row center">
+                        <div class="large-12 columns">
+                            <p><b>Id:</b> @discount.Id</p>
+                            <p><b>Discount %:</b> @discount.Kortingspercentage</p>
+                            <p><b>End Date:</b> @discount.EindDatum</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs-panel paneel center" id="Updatediscount">
+                    <form action="/Manage/DiscountUpdate" method="post">
+                        <div class="row center">
+                            <input type="hidden" name="id" value="@discount.Id" />
+                            <input type="number" name="discountPercentage" value="@discount.Kortingspercentage" />
+                            <input type="text" name="Description" value="@discount.Opmerking" />
+                            <input type="date" name="endDate" value="@discount.EindDatum" />
+
+                            <label>Products with this discount:</label>
+                            <select multiple name="productIds">
+                                @foreach (Product p in products)
+                                {
+                                    // als product in korting.retrieve zit
+
+                                    if (Korting.RetrieveByProductId(p.Id.ToString()) != null)
+                                    {
+                                        <option value="@p.Id" selected="selected">@p.Titel -  @p.Prijs</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@p.Id">@p.Titel -  @p.Prijs</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+
+                        <div class="spacer">
+                        </div>
+                        <div id="updateButtons" class="row stickToBottom maxWidth">
+                            <div class="large-12 columns">
+
+                                <input class="button expanded success" name="updateBtn" type="submit" value="Update discount" />
+
+                                <input class="button expanded alert" name="deleteBtn" type="submit" value="Delete discount" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

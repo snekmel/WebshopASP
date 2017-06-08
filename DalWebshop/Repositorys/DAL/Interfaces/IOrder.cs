@@ -14,7 +14,5 @@ namespace DalWebshop.Repositorys.DAL.Interfaces
         void Update(Order obj);
 
         void Delete(string key);
-
-        
     }
 }

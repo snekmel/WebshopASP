@@ -6,7 +6,7 @@
     List<Afbeelding> images = p.RetrieveAfbeeldingen();
     List<Recensie> recensies = ViewBag.Recensies;
     List<Korting> discounts = ViewBag.Kortingen;
-        Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
@@ -18,30 +18,34 @@
         }
 
         <div class="row small-up-4">
-         @for (int i = 1; i < images.Count; i++)
-         {
-             <div class="column">
-                 <img class="thumbnail" src="@images[i].Path/@images[i].Naam">
-             </div>
-         }
-
+            @for (int i = 1; i < images.Count; i++)
+            {
+                <div class="column">
+                    <img class="thumbnail" src="@images[i].Path/@images[i].Naam">
+                </div>
+            }
         </div>
     </div>
     <div class="medium-6 large-5 columns left">
         <h3>@p.Titel</h3>
         <p>@p.Omschrijving</p>
-        
         <div class="row">
             <div class="small-12 columns">
-                <label for="middle-label" class="middle">In Warehouse : @p.Voorraad</label>
-           
-            </div>  
-   
-            <h3> &euro; @p.Prijs</h3>
-        </div>          
+                <label for="middle-label" class="middle">In Warehouse : @p.Voorraad  <br />Average score:
+                @if (@Recensie.AverageScoreByProductId(p.Id) != 0)
+                {
+                    <span> @Recensie.AverageScoreByProductId(p.Id)</span>
+                }
+                else
+                {
+                    <span> No reviews yet</span>
+                }
+                </label>           
+            </div>
+            <h3> &euro; @p.Prijs</h3> 
+        </div>
         <span id="btnBuynow">
-         
-            <br/>
+            <br />
             @if (discounts != null)
             {
                 foreach (Korting k in discounts)
@@ -52,7 +56,6 @@
                     </div>
                 }
             }
-
             <a href="/Shoppingcart/Add/@p.Id" class="button large expanded bottom">Buy Now</a>
         </span>
     </div>
@@ -65,7 +68,15 @@
     </ul>
     <div class="tabs-content" data-tabs-content="example-tabs">
         <div class="tabs-panel is-active" id="panel1">
-            <h4>Reviews</h4>
+            <br />
+            @if (recensies.Count == 0)
+            {
+                <h4>No reviews yet.</h4>
+            }
+            else
+            {
+                <h4>Reviews</h4>
+            }
 
             @foreach (Recensie r in recensies)
             {
@@ -80,11 +91,35 @@
                 </div>
             }
 
-            <label>
-                My Review
-                <textarea placeholder="None"></textarea>
-            </label>
-            <button class="button">Submit Review</button>
+            @if (ViewBag.CanReview != null && ViewBag.CanReview && Session["AuthGebruiker"] !=null)
+            {
+                Gebruiker authUser = (Gebruiker)Session["AuthGebruiker"];
+                <form action="/Recensie/Add" method="post">
+                <br />
+                <hr />
+                <h4 class="center"> Write a review:</h4>
+                <div class="row">
+                    <div class="small-2 columns">Satisfied: </div>
+                    <div class="small-10 columns"><input name="tevreden" type="checkbox" /></div>
+                </div>
+                <div class="row">
+                    <div class="small-2 columns">Score (1 - 10): </div>
+                    <div class="small-10 columns"> <input name="score" type="number" min="1" max="10" /></div>
+                </div>
+                <div class="row">
+                    <div class="small-2 columns">Description </div>
+                    <div class="small-10 columns"> <textarea name="opmerking" placeholder="Write a review..."></textarea></div>
+                </div>
+
+            <div class="row">
+                <div class="small-2 columns"> </div>
+                <input type="hidden" value="@authUser.Id" name="userId"/>
+                <input type="hidden" value="@p.Id" name="productId" />
+                <div class="small-10 columns"><button class="button maxWidth" type="submit">Submit Review</button></div>
+            </div>
+                </form>
+
+            }
         </div>
 
         <div class="tabs-panel" id="panel2">
@@ -123,3 +158,4 @@
         </div>
     </div>
 </div>
+<br /><br />

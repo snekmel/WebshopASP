@@ -16,5 +16,7 @@ namespace DalWebshop.Repositorys.DAL.Interfaces
         void Delete(string key);
 
         List<Product> RetrieveByOrderId(int id);
+
+        List<ProductVerkoop> RetrieveVerkoop();
     }
 }

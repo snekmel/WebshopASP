@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,9 +10,17 @@ namespace WebshopASP.Controllers
 {
     public class ManageController : Controller
     {
-        //Get: Manage/Users
-        public ActionResult Users()
+        //Get: Manage/Users -   //Get: Manage/Users/{id}
+        public ActionResult Users(string id)
         {
+
+            ViewBag.Gebruikers = Gebruiker.All();
+            if (id != null)
+            {
+                ViewBag.Gebruiker = Gebruiker.Find(id);
+            }
+          
+
             return View("~/Views/Manage/Users.cshtml");
         }
 
@@ -79,6 +88,7 @@ namespace WebshopASP.Controllers
 
             if (id != null)
             {
+                ViewBag.Product = Product.Find(id);
                 ViewBag.Discount = Korting.Find(id);
             }
 
@@ -134,17 +144,24 @@ namespace WebshopASP.Controllers
         }
 
         // GET: Manage/Products
-        public ActionResult Products()
+        public ActionResult Products(string id)
         {
             ViewBag.Producten = Product.All();
             ViewBag.Leverancier = Leverancier.All();
             ViewBag.Categorien = Productcategorie.All();
+
+            if (id != null)
+            {
+                ViewBag.Product = Product.Find(id);
+                ViewBag.Discount = Korting.Find(id);
+            }
+
             return View("~/Views/Manage/Products.cshtml");
         }
 
         //POST: Manage/ProductNew
         [HttpPost]
-        public HtmlString ProductNew(IEnumerable<HttpPostedFileBase> images, FormCollection form)
+        public ActionResult ProductNew(IEnumerable<HttpPostedFileBase> images, FormCollection form)
         {
             string title = form["title"];
             string desc = form["description"];
@@ -167,7 +184,90 @@ namespace WebshopASP.Controllers
                     Afbeelding.Save(newAfbeelding, Convert.ToInt32(newProductId));
                 }
             }
-            return new HtmlString("test");
+            return this.Products("");
         }
+
+        //Manage/ProductUpdate
+        [HttpPost]
+        public ActionResult ProductUpdate(IEnumerable<HttpPostedFileBase> images, FormCollection form)
+        {
+
+            string productId = form["productId"];
+
+            if (form["type"] == "Update")
+            {
+              
+                string title = form["title"];
+                string desc = form["description"];
+                int voorraad = Convert.ToInt32(form["stock"]);
+                decimal prijs = Decimal.Parse(form["price"]);
+                int categorieId = Convert.ToInt32(form["categories"]);
+                int leverancierId = Convert.ToInt32(form["supplier"]);
+
+
+                Product selectedProduct = Product.Find(productId);
+                selectedProduct.Titel = title;
+                selectedProduct.Omschrijving = desc;
+                selectedProduct.Voorraad = voorraad;
+                selectedProduct.Prijs = prijs;
+                selectedProduct.ProductCategorieId = categorieId;
+                selectedProduct.LeverancierId = leverancierId;
+
+                selectedProduct.SaveOrUpdate();
+
+                foreach (var file in images)
+                {
+                    if (file != null)
+                    {
+                        var fileName = Guid.NewGuid() + Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/Images"), fileName);
+                        file.SaveAs(path);
+                        Afbeelding newAfbeelding = new Afbeelding("/Content/Images", fileName);
+                        Afbeelding.Save(newAfbeelding, Convert.ToInt32(productId));
+                    }
+                }
+            }
+            else if(form["type"] == "Delete")
+            {
+              /*  Product selectedProduct = Product.Find(productId);
+                foreach (Afbeelding img in selectedProduct.RetrieveAfbeeldingen())
+                {
+                    Afbeelding.Delete(img.Id);
+                }
+
+              */
+
+            }
+         
+
+            return this.Products(productId);
+        }
+
+        // /Manage/DeleteImage
+        [HttpPost]
+        public ActionResult DeleteImage(FormCollection form)
+        {
+
+            if (form["afbeeldingId"] != null)
+            {
+                int afbeeldingId = Convert.ToInt32(form["afbeeldingId"]);
+                Afbeelding.Delete(afbeeldingId);
+            }
+
+            return this.Products("");
+
+        }
+
+
+        //Manage/Sales
+        public ActionResult Sales()
+        {
+            List<ProductVerkoop> sales = Product.GetSales();
+
+            ViewBag.Sales = sales;
+            ViewBag.Highest = sales.Max(p => p.Aantal);
+            return View("~/Views/Manage/Sales.cshtml");
+        }
+
     }
 }

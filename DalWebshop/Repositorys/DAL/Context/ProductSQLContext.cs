@@ -184,5 +184,37 @@ namespace DalWebshop.Repositorys.DAL.Context
                 throw;
             }
         }
+
+        public List<ProductVerkoop> RetrieveVerkoop()
+        {
+            List<ProductVerkoop> returnList = new List<ProductVerkoop>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(Env.ConString))
+                {
+                    string query = "Select * from Sales";
+                    SqlCommand cmd = new SqlCommand(query, con);
+
+                    con.Open();
+
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                       
+                        ProductVerkoop pv = new ProductVerkoop(reader.GetInt32(0), reader.GetInt32(1));
+                        returnList.Add(pv);
+                    }
+                    con.Close();
+                }
+
+                return returnList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

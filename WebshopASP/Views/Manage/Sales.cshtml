@@ -1,0 +1,36 @@
+﻿@using DalWebshop.Models
+
+@{
+    ViewBag.Title = "Sales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<ProductVerkoop> sales = ViewBag.Sales;
+    int count = ViewBag.Highest;
+
+}
+<div class="row" style="height: 700px">
+    <br /><br/><br/>
+    <h2>Sales</h2>
+
+    <ul class="bar-graph">
+        <li class="bar-graph-axis">
+            <div class="bar-graph-label">@count</div>
+            <div class="bar-graph-label"></div>           
+            <div class="bar-graph-label">@(count / 3 * 2)</div>
+            <div class="bar-graph-label"></div>        
+            <div class="bar-graph-label">@(count / 3 * 1)</div>
+            <div class="bar-graph-label"></div>
+            <div class="bar-graph-label"></div>
+          
+        </li>
+        @foreach (ProductVerkoop pv in sales)
+        {
+            int percentage = (int) Math.Round((double) (100 * pv.Aantal) / count);
+
+            <li class="bar primary" style="height: @percentage%">
+                <div class="percent">@pv.Aantal</div>
+                <div class="description">@pv.Product.Titel</div>
+            </li>
+        }
+    </ul>
+
+</div>

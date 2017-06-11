@@ -15,6 +15,16 @@ namespace WebshopASP
        defaults: new { controller = "Order", action = "Add", id = UrlParameter.Optional }
       );
 
+
+            routes.MapRoute(
+                name: "Productcategory",
+                url: "Productcategory/{id}",
+                defaults: new { controller = "Product", action = "ProductCategorie", id = UrlParameter.Optional }
+            );
+
+
+
+
             routes.MapRoute(
 name: "RemoveOrderRow",
 url: "Shoppingcart/Remove/{id}",

@@ -63,5 +63,13 @@ namespace WebshopASP.Tests
 
             rr.Delete("2");
         }
+
+        [TestMethod]
+        public void CanReveiw()
+        {
+            bool canReview = Recensie.CanReview(17, 1);
+
+            Assert.IsTrue(canReview);
+        }
     }
 }

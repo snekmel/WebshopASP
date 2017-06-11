@@ -60,5 +60,21 @@ namespace WebshopASP.Tests
             ProductSQLContext psc = new ProductSQLContext();
             ProductRepository pr = new ProductRepository(psc);
         }
+
+
+        [TestMethod]
+        public void DatabaseViewTest()
+        {
+
+            ProductSQLContext psc = new ProductSQLContext();
+            ProductRepository pr = new ProductRepository(psc);
+
+            List <ProductVerkoop> test =  pr.RetrieveVerkoop();
+
+            string title = test[0].Product.Titel;
+
+
+
+        }
     }
 }

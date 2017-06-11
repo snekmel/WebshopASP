@@ -81,6 +81,7 @@ namespace WebshopASP.Controllers
         public ActionResult Post(FormCollection form)
         {
             Order newOrder = (Order)Session["CartOrder"];
+            
             Gebruiker loggedUser = (Gebruiker)Session["AuthGebruiker"];
 
             if (loggedUser == null)

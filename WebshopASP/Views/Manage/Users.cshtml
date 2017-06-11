@@ -1,6 +1,79 @@
-﻿@{
+﻿@using DalWebshop.Models
+@{
     ViewBag.Title = "Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Gebruiker> users = ViewBag.Gebruikers;
+    Gebruiker user = ViewBag.Gebruiker;
 }
 
-<h2>Users</h2>
+<div class="row text-center">
+    <br />
+    <h2>Users</h2>
+
+    <table id="suppliersTable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Name</th>  
+                <th>Open</th>  
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Name</th>  
+                <th>Open</th>  
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (Gebruiker u in users)
+            {
+                <tr>
+                    <td>@u.Id</td>
+                    <td>@u.Email</td>
+                    <td>@u.Voornaam @u.Achternaam</td>           
+                    <td><a href="@Url.Content("~/Manage/Users/")@u.Id" class="button"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</div>
+@if (user != null)
+{
+    <div class="large reveal" style="height: 75%" id="updateForm" data-reveal data-options="close_on_background_click:false;close_on_esc:false;">
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div class="row">
+
+            <ul class="tabs" data-tabs id="example-tabs">          
+                <li class="tabs-title is-active"><a href="#UserInfo" aria-selected="true">User information</a></li>
+            </ul>
+            <div class="tabs-content" data-tabs-content="example-tabs">
+                <div class="tabs-panel is-active paneel " id="UserInfo">
+                    <div id="UserInfo" class="row center">
+                        <div class="large-4 columns">
+                            <p><b>Name:</b> @user.Voornaam @user.Achternaam</p>
+                            <p><b>Email:</b> @user.Email</p>
+                         </div>
+                        <div class="large-8 columns">
+                            <div class="large-8 columns">
+                                <p><b>Street:</b> @user.Straat</p>
+                                <p><b>Zipcode:</b> @user.Postcode</p>
+                                <p><b>City:</b> @user.Woonplaats</p>
+                                <p><b>Country:</b> @user.Land</p>
+                            </div>
+                            <div class="large-4 columns">
+                                <p><b>House number:</b> @user.Huisnummer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+            </div>
+        </div>
+    </div>
+}

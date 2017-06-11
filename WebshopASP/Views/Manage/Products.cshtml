@@ -7,6 +7,22 @@
     List<Product> producten = ViewBag.Producten;
     List<Leverancier> suppliers = ViewBag.Leverancier;
     List<Productcategorie> categories = ViewBag.Categorien;
+    Product product = ViewBag.Product;
+    List<Afbeelding> images;
+
+
+
+    if (product != null)
+    {
+      images = Afbeelding.RetrieveAfbeeldingenByProductId(product.Id);
+       
+    
+    }
+    else
+    {
+       images = null;
+    }
+
 }
 <div class="row text-center">
     <br />
@@ -19,7 +35,6 @@
             <th>Description</th>
             <th>In Stock</th>
             <th>Price</th>
-            <th>HasDiscount</th>
             <th>Supplier</th>
             <th>Edit</th>
         </tr>
@@ -31,7 +46,6 @@
             <th>Description</th>
             <th>In Stock</th>
             <th>Price</th>
-            <th>HasDiscount</th>
             <th>Supplier</th>
             <th>Edit</th>
         </tr>
@@ -44,10 +58,9 @@
                 <td>@p.Titel</td>
                 <td>@p.Omschrijving</td>
                 <td>@p.Voorraad</td>
-                <td>@p.Prijs</td>
-                <td>idk</td>
-                <td>@p.LeverancierId</td>
-                <td>edit</td>
+                <td>@p.Prijs</td>     
+                <td>@p.RetrieveLeverancier().Naam</td>
+                <td><a href="@Url.Content("~/Manage/Products/")@p.Id" class="button"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
             </tr>
         }
         </tbody>
@@ -57,38 +70,194 @@
 <div class="row">
     <p><a class="button success" data-open="newProduct"><i class="fa fa-plus" aria-hidden="true"></i> Add Product</a></p>
 </div>
-<div class="reveal" id="newProduct" data-reveal style="height: 75%; width: 80%">
-    <form action="/Manage/ProductNew" method="post" enctype="multipart/form-data">
-        <div class="large-8">
-            <input type="file" name="Images" />
-            <input type="file" name="Images" />
-            <input type="file" name="Images" />
-            <input type="file" name="Images" />
-            <input type="file" name="Images" />
-        </div>
-        <div class="large-8">
-            <input type="text" name="title" />
-            <input type="text" name="description" />
-            <input type="number" name="stock" />
-            <input type="number" name="price" step="any" />
 
-            <select name="supplier">
-                @foreach (Leverancier l in suppliers)
-                {
-                    <option value="@l.Id">@l.Naam</option>
-                }
-            </select>
-            <select name="categories">
-                @foreach (Productcategorie pc in categories)
-                {
-                    <option value="@pc.Id">@pc.Naam</option>
-                }
-            </select>
+
+<div class="large reveal" style="height: 75%" id="newProduct" data-reveal data-options="close_on_background_click:false;close_on_esc:false;">
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="row">
+
+        <ul class="tabs" data-tabs id="example-tabs">          
+            <li class="tabs-title is-active"><a href="#ProductNew" aria-selected="true">New Product</a></li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="example-tabs">
+            <div class="tabs-panel is-active paneel " id="ProductNew">
+                
+                <form action="/Manage/ProductNew" method="post" enctype="multipart/form-data">
+                    <div id="ProductNew" class="row center">
+                        <div class="large-6 columns">
+                            <input type="file" name="Images"/>
+                            <input type="file" name="Images"/>
+                            <input type="file" name="Images"/>
+                            <input type="file" name="Images"/>
+                            <input type="file" name="Images"/>
+                        </div>
+                        <div class="large-6 columns">
+                            <input type="text" name="title" placeholder="Title"/>
+                            <input type="text" name="description" placeholder="Description"/>
+                            <input type="number" name="stock" placeholder="Stock"/>
+                            <input type="number" name="price" step="any" placeholder="Price"/>
+
+                            <select name="supplier">
+                                @foreach (Leverancier l in suppliers)
+                                {
+                                    <option value="@l.Id">@l.Naam</option>
+                                }
+                            </select>
+                            <select name="categories">
+                                @foreach (Productcategorie pc in categories)
+                                {
+                                    <option value="@pc.Id">@pc.Naam</option>
+                                }
+                            </select>
+
+                            <div id="updateButtons" class="row stickToBottom maxWidth">
+                                <div class="large-12 columns">
+                                    <input class="button expanded success" type="submit" value="Create Produdct"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>        
         </div>
-        <div id="updateButtons" class="row stickToBottom maxWidth">
-           <div class="large-12 columns">
-               <input class="button expanded success" type="submit" value="Create Produdct" />
-           </div>
-       </div>
-    </form>
+    </div>
 </div>
+@if (product != null)
+{
+    <div class="large reveal" style="height: 75%" id="updateForm" data-reveal data-options="close_on_background_click:false;close_on_esc:false;">
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <div class="row">
+
+            <ul class="tabs" data-tabs id="example-tabs">          
+                <li class="tabs-title is-active"><a href="#productInfo" aria-selected="true">Product Info</a></li>
+                <li class="tabs-title"><a href="#productUpdate" aria-selected="true">Update product</a></li>
+            </ul>        
+        <div class="tabs-content" data-tabs-content="example-tabs">
+            <form action="/Manage/ProductUpdate" method="post" enctype="multipart/form-data">     
+                <div class="tabs-panel  paneel " id="productUpdate">
+                    <div id="productUpdate" class="row ">
+                        <div class="large-6 columns">                                                                            
+                              <input type="hidden" name="productId" value="@product.Id"/>  
+                            <input type="text" name="title" value="@product.Titel"/>
+                            <input type="text" name="description" value="@product.Omschrijving"/>
+                            <input type="number" name="stock" value="@product.Voorraad"/>
+                            <input type="number" name="price" value="@product.Prijs" step="any"/>
+                            <select name="supplier">
+                                @foreach (Leverancier l in suppliers)
+                                {
+                                    if (l.Id == product.LeverancierId)
+                                    {
+                                        <option value="@l.Id" selected="selected">@l.Naam</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@l.Id">@l.Naam</option>
+                                    }
+                                }
+                            </select>
+                            <select name="categories">
+                                @foreach (Productcategorie pc in categories)
+                                {
+                                    if (pc.Id == product.ProductCategorieId)
+                                    {
+                                        <option selected="selected" value="@pc.Id">@pc.Naam</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@pc.Id">@pc.Naam</option>
+                                    }
+
+                                }
+                            </select>                      
+                        </div>
+                        <div class="large-6 columns">
+                         
+                                <table style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>       
+                                    @foreach (Afbeelding img in images)
+                                    {
+                                        <tr>
+                                            <td><img class="thumbnail" src="@img.Path/@img.Naam" style="height: 170px"></td>
+                                            <form action="/Manage/DeleteImage" method="post">
+                                            <td><button class="button alert" name="afbeeldingId" type="submit" action-re value="@img.Id"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                                        </form>
+                                                </tr>
+                                    }
+                                    @if (images.Count < 5)
+                                    {
+                                        for (int i = 0; i < (5 - images.Count); i++)
+                                        {
+                                            <tr>
+                                                <td><input type="file" name="Images"/></td>
+                                                <td></td>
+                                            </tr>
+                                        }
+                                    }
+                                   
+                                    </tbody>
+                                </table>
+                        
+                            <div id="updateButtons" class="row stickToBottom maxWidth">
+                                <div class="large-12 columns">
+                                    <input class="button expanded success" name="type" type="submit" value="Update"/>
+                                    <input class="button expanded alert" name="type" type="submit" value="Delete"/>
+                                </div>
+                            </div>                       
+                        </div>
+                    </div>
+                </div>   
+            </form>
+            </div>         
+            <div class="tabs-content" data-tabs-content="example-tabs">
+                <div class="tabs-panel is-active paneel " id="productInfo">
+                    <div id="productInfo" class="row ">
+                        <div class="large-6 columns">
+                            <p><b>Id:</b> @product.Id</p>
+                            <p><b>Title:</b> @product.Titel</p>
+                            <p><b>Descritpion:</b> @product.Omschrijving</p>
+                            <p><b>Stock:</b> @product.Voorraad</p>
+                            <p><b>Price:</b> @product.Prijs</p>
+                        </div>
+                        <div class="large-6 columns center">
+                            <table style="width: 100%">
+                                @if (images != null)
+                                {
+                                    <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                    
+                                    </tr>
+                                    </thead>
+                                    <tbody>       
+                                    @foreach (Afbeelding img in images)
+                                    {
+                                        <tr>
+                                            <td><img class="thumbnail" src="@img.Path/@img.Naam" style="height: 170px"></td>
+                                        
+                                        </tr>
+                                    }
+                          
+                                 
+                                    </tbody>
+                                }                                
+                            </table>                                                                         
+                         </div>
+                    </div>
+                </div>        
+            </div>
+        </div>
+    </div>
+}

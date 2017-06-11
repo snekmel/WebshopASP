@@ -55,7 +55,10 @@ namespace DalWebshop.Repositorys
 
         }
 
-
+        public List<ProductVerkoop> RetrieveVerkoop()
+        {
+            return _interface.RetrieveVerkoop();
+        }
 
     }
 }

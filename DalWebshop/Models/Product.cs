@@ -1,6 +1,7 @@
 ﻿using DalWebshop.Repositorys;
 using DalWebshop.Repositorys.DAL.Context;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace DalWebshop.Models
 {
@@ -11,7 +12,7 @@ namespace DalWebshop.Models
         public string Omschrijving { get; set; }
         public int Voorraad { get; set; }
         public decimal Prijs { get; set; }
-        public int LeverancierId { get; private set; }
+        public int LeverancierId { get;  set; }
         public int ProductCategorieId { get; set; }
 
         public Product(int id, string titel, string omschrijving, int voorraad, decimal prijs, int leverancierId, int productCategorieId)
@@ -111,6 +112,31 @@ namespace DalWebshop.Models
             ProductSQLContext psc = new ProductSQLContext();
             ProductRepository pr = new ProductRepository(psc);
             return pr.RetrieveNewestProducts(aantal);
+        }
+
+        public static List<Product> GetByCategorieId(int categorieId)
+        {
+            List<Product> all = Product.All();
+            List<Product> returnList = new List<Product>();
+
+            foreach (Product p in all)
+            {
+                if (p.ProductCategorieId == categorieId)
+                {
+                    returnList.Add(p);
+                }   
+            }
+
+            return returnList;
+        }
+
+
+        public static List<ProductVerkoop> GetSales()
+        {
+            ProductSQLContext psc = new ProductSQLContext();
+            ProductRepository pr = new ProductRepository(psc);
+
+            return pr.RetrieveVerkoop();
         }
     }
 }

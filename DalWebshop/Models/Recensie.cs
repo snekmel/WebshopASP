@@ -1,6 +1,7 @@
 ﻿using DalWebshop.Repositorys;
 using DalWebshop.Repositorys.DAL.Context;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 
 namespace DalWebshop.Models
 {
@@ -64,6 +65,28 @@ namespace DalWebshop.Models
             return rr.Retrieve(key);
         }
 
+        public static int AverageScoreByProductId(int productId)
+        {
+            List<Recensie> list = FindByProductId(productId);
+            int total = 0;
+                
+            foreach (Recensie r in list)
+            {
+              total =  total + r.Score;
+            }
+
+            if (total == 0)
+            {
+                return total;
+            }
+            else
+            {
+                return (total / list.Count);
+            }
+          
+        }
+
+
         public static List<Recensie> FindByProductId(int id)
         {
             RecensieSQLContext rcs = new RecensieSQLContext();
@@ -78,6 +101,37 @@ namespace DalWebshop.Models
             RecensieRepository rr = new RecensieRepository(rcs);
 
             return rr.RetrieveByGebruikerId(id);
+        }
+
+        public static bool CanReview(int productId, int userId)
+        {
+            bool returnValue = false;
+
+            List<Order> userOrders = Order.FindOrderByGebruikerId(userId);
+            List<Recensie> userRecensies = Recensie.FindByGebruikerId(userId);
+
+            foreach (Order order in userOrders)
+            {
+                foreach (OrderRow or in order.Producten)
+                {
+                    if (or.ProductId == productId)
+                    {
+                        // klant heeft product ooit besteld
+                        returnValue = true;
+
+                        foreach (Recensie recensie in userRecensies)
+                        {
+                            //Check of klant al een review heeft geschreven voor dit product.
+                            if (recensie.ProductId == productId)
+                            {
+                                returnValue = false;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return returnValue;
         }
     }
 }
